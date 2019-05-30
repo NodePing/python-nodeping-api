@@ -13,7 +13,7 @@ def get_all(token, customerid=None):
     original JSON that is gathered from NodePing
     """
 
-    check_token.main(token)
+    check_token.is_valid(token)
 
     if customerid:
         url = "{0}contacts?token={1}&customerid={2}".format(

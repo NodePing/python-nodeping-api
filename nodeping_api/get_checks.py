@@ -13,7 +13,7 @@ class GetChecks:
         self.customerid = customerid
 
         # Checks to see if the API token provided is valid
-        check_token.main(self.token)
+        check_token.is_valid(self.token)
 
     def all_checks(self):
         """ Gets all checks that exist for the account
