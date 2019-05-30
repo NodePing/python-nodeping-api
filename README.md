@@ -2,6 +2,31 @@
 
 A Python3 library for managing checks, schedules, and contacts
 
+- [General Usage](#general-usage)
+- [Check token](#check-token)
+  * [Checking validity](#checking-validity)
+  * [Retrieving Account Info](#retrieving-account-info)
+- [Get Checks](#get-checks)
+- [Create Checks](#create-checks)
+- [Update Checks](#update-checks)
+  * [Updating one](#updating-one)
+  * [Updating many](#updating-many)
+- [Disable Checks](#disable-checks)
+  * [Disable by Label](#disable-by-label)
+  * [Disable by Target](#disable-by-target)
+  * [Disable by Type](#disable-by-type)
+  * [Disable All](#disable-all)
+- [Delete Checks](#delete-checks)
+- [Get Contacts](#get-contacts)
+  * [Get All Contacts](#get-all-contacts)
+  * [Get Contacts by Type](#get-contacts-by-type)
+- [Schedules](#schedules)
+  * [Get Schedules](#get-schedules)
+  * [Create Schedules](#create-schedules)
+  * [Update Schedules](#update-schedules)
+  * [Delete Schedules](#delete-schedules)
+
+
 ## General Usage
 
 To use the NodePing API with Python3, you are required to use your
@@ -326,7 +351,7 @@ Get contacts on your NodePing account via the `get_contacts.py` module.
 This module allows you to get all contacts on your account or by type
 such as sms, email, webhook.
 
-### Get All Checks
+### Get All Contacts
 
 ``` python
 from nodeping_api import get_contacts
