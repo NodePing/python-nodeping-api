@@ -93,7 +93,7 @@ def update_schedule(token, data, schedule_name, customerid=None):
     for the specified user account. Returns the results from NodePing
     in a dictionary format.
 
-    :param: token: The NodePing APi token for the account
+    :param: token: The NodePing API token for the account
     :type token: str
     :param data: The schedules for each day to receive notifications
     :type dict
