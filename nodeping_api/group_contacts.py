@@ -65,7 +65,7 @@ def create_group(token, name, members=None, customerid=None):
     return _query_nodeping_api.post(url, data)
 
 
-def create_group(token, name, members=None, customerid=None):
+def update_group(token, name, members=None, customerid=None):
     """ Update an existing contact group on your NodePing account
 
     Update a contact group with a specified name and
