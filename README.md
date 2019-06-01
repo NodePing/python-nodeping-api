@@ -2,29 +2,42 @@
 
 A Python3 library for managing checks, schedules, and contacts
 
-- [General Usage](#general-usage)
-- [Check token](#check-token)
-  * [Checking validity](#checking-validity)
-  * [Retrieving Account Info](#retrieving-account-info)
-- [Get Checks](#get-checks)
-- [Create Checks](#create-checks)
-- [Update Checks](#update-checks)
-  * [Updating one](#updating-one)
-  * [Updating many](#updating-many)
-- [Disable Checks](#disable-checks)
-  * [Disable by Label](#disable-by-label)
-  * [Disable by Target](#disable-by-target)
-  * [Disable by Type](#disable-by-type)
-  * [Disable All](#disable-all)
-- [Delete Checks](#delete-checks)
-- [Get Contacts](#get-contacts)
-  * [Get All Contacts](#get-all-contacts)
-  * [Get Contacts by Type](#get-contacts-by-type)
-- [Schedules](#schedules)
-  * [Get Schedules](#get-schedules)
-  * [Create Schedules](#create-schedules)
-  * [Update Schedules](#update-schedules)
-  * [Delete Schedules](#delete-schedules)
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [python3-nodeping-api](#python3-nodeping-api)
+    - [General Usage](#general-usage)
+    - [Check token](#check-token)
+        - [Checking validity](#checking-validity)
+            - [Sample Code](#sample-code)
+        - [Retrieving Account Info](#retrieving-account-info)
+    - [Get Checks](#get-checks)
+    - [Create Checks](#create-checks)
+    - [Update Checks](#update-checks)
+        - [Updating one](#updating-one)
+        - [Updating many](#updating-many)
+    - [Disable Checks](#disable-checks)
+        - [Disable by Label](#disable-by-label)
+        - [Disable by Target](#disable-by-target)
+        - [Disable by Type](#disable-by-type)
+        - [Disable All](#disable-all)
+    - [Delete Checks](#delete-checks)
+    - [Get Contacts](#get-contacts)
+        - [Get All Contacts](#get-all-contacts)
+        - [Get Contacts by Type](#get-contacts-by-type)
+    - [Contact Groups](#contact-groups)
+        - [Get Groups](#get-groups)
+        - [Create Groups](#create-groups)
+        - [Update Group](#update-group)
+        - [Delete Group](#delete-group)
+    - [Schedules](#schedules)
+        - [Get Schedules](#get-schedules)
+        - [Create Schedules](#create-schedules)
+        - [Update Schedules](#update-schedules)
+        - [Delete Schedules](#delete-schedules)
+
+<!-- markdown-toc end -->
+
 
 
 ## General Usage
@@ -389,6 +402,120 @@ contact_type = 'sms'
 
 contacts = get_contacts.get_by_type(token, contact_type)
 ```
+
+## Contact Groups
+
+Manage contact groups on your NodePing account via the `group_contacts.py` module.
+
+<https://nodeping.com/docs-api-contactgroups.html>
+
+This module lets you manage contact groups in these ways:
+
+  - Get contact groups
+
+  - Create contact groups
+
+  - Update contact groups
+
+  - Delete contact groups
+  
+### Get Groups
+
+``` python
+from nodeping_api import group_contacts
+
+# Get contact groups
+groups = group_contacts.get_all(token)
+
+# Get contact groups with SubAccount ID
+subaccount_id = "your-subaccount-id"
+
+groups = group_contacts.get_all(token, customerid=subaccount_id)
+```
+
+### Create Groups
+
+To create a contact group, a name for the group is required. You can optionally
+provide members for the contact group in a list. The member will be the key in
+the addresses field for each contact. For example, if your contact data is this:
+
+```
+    {
+      "201205050153W2Q4C-BKPGH": {
+        "_id": "201205050153W2Q4C-BKPGH",
+        "type": "contact",
+        "customer_id": "201205050153W2Q4C",
+        "name": "Foo Bar",
+        "custrole": "owner",
+        "addresses": {
+          "K5SP9CQP": {
+            "address": "foo@example.com",
+            "status": "new"
+          }
+        }
+      }
+    }
+```
+
+Then the contact ID you need is "K5SP9CQP".
+
+Example:
+
+``` python
+from nodeping_api import group_contacts
+
+name = "sample_group"
+my_members = ["K5SP9CQP", "D3RF9NQT"]
+
+# Create group without members
+empty_group = group_contacts.create_group(token, name)
+
+# Create group with members
+new_group = group_contacts.create_group(token, name, members=my_members)
+```
+
+### Update Group
+
+Updating the group is the same idea as creating a group.
+
+Example:
+
+``` python
+from nodeping_api import group_contacts
+
+name = "sample_group"
+new_name = "renamed"
+my_members = ["K5SP9CQP", "D3RF9NQT"]
+
+# Update group with new members
+updated_group = group_contacts.update_group(token, name, members=my_members)
+
+# Rename a group
+renamed = group_contacts.update_group(token, new_name)
+```
+
+### Delete Group
+
+To delete the group, you need to provide the group id, which can be found
+when you get the groups.
+
+Example:
+
+``` python
+from nodeping_api import group_contacts
+
+group_id = "201205050153W2Q4C-G-1ZIYU"
+
+# Delete the group
+deleted = group_contacts.delete_group(token, group_id)
+```
+
+This will return a dictionary stating that the group was deleted:
+
+`{'id': '201205050153W2Q4C-G-1ZIYU', 'ok': True}`
+
+If it failed, a dictionary with the key error will be gathered.
+
 
 ## Schedules
 
