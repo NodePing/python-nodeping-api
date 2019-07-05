@@ -8,6 +8,15 @@ API_URL = config.API_URL
 
 class GetChecks:
     def __init__(self, token, checkid=None, customerid=None):
+        """
+        :type token: string
+        :param token: NodePing API token
+        :type checkid: string
+        :param checkid: ID for check to retrieve data for
+        :type customerid: string
+        :param customerid: subaccount ID
+        """
+
         self.token = token
         self.checkid = checkid
         self.customerid = customerid

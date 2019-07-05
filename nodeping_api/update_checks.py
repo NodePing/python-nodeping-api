@@ -12,6 +12,17 @@ def update(token, checkid, fields, customerid=None):
     Accepts a token, checkid, and fields to be updated in a NodePing
     check. Updates the specified fields for the one check. To update
     many checks with the same value, use update_many
+
+    :type token: string
+    :param token: Your NodePing API token
+    :type checkid: string
+    :param checkid: CheckID to update
+    :type fields: dict
+    :param fields: Fields in check that will be updated
+    :type customerid: string
+    :param customerid: subaccount ID
+    :rtype: dict
+    :return: Return information from NodePing query
     """
 
     if type(checkid) == list:
@@ -36,6 +47,17 @@ def update_many(token, checkids, fields, customerid=None):
     Accepts a token, a list of checkids, and fields to be updated in a
     NodePing check. Updates the specified fields for the one check.
     To update many checks with the same value, use update_many
+
+    :type token: string
+    :param token: Your NodePing API token
+    :type checkids: list
+    :param checkids: CheckIDs to update
+    :type fields: dict
+    :param fields: Fields in check that will be updated
+    :type customerid: string
+    :param customerid: subaccount ID
+    :rtype: dict
+    :return: Return information from NodePing query
     """
 
     updated_checks = []

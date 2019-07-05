@@ -11,6 +11,11 @@ def get_all(token, customerid=None):
 
     Returns all the data in a dictionary format from the
     original JSON that is gathered from NodePing
+
+    :type token: string
+    :param token: NodePing API token
+    :type customerid: string
+    :param customerid: subaccount ID
     """
 
     check_token.is_valid(token)
@@ -29,6 +34,13 @@ def get_by_type(token, contacttype, customerid=None):
 
     Returns all the data in a dictionary format from the originl
     JSON that is gathered from NodePing.
+
+    :type token: string
+    :param token: NodePing API token
+    :type contacttype: string
+    :param contacttype: Type of contact to be retrieved
+    :type customerid: string
+    :param customerid: subaccount ID
     """
 
     contact_dict = {}
