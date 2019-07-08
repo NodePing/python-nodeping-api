@@ -5,16 +5,11 @@ with open("README.md", "r") as fh:
 
 NAME = 'nodeping_api'
 DESCRIPTION = 'Python package for querying the NodePing API'
-URL = 'https://github.com/NodePing/python3-nodeping-api'
+URL = 'https://github.com/NodePing/python-nodeping-api'
 EMAIL = 'support@nodeping.com'
 AUTHOR = 'NodePing'
-REQUIRES_PYTHON = '>=3.5.0'
-VERSION = '0.9.1'
+VERSION = '0.9.2'
 LICENSE = 'MIT'
-
-REQUIRED = [
-    'json', 'sys', 'urllib.error', 'urllib.request'
-]
 
 setuptools.setup(
     name=NAME,
@@ -27,6 +22,7 @@ setuptools.setup(
     url=URL,
     packages=setuptools.find_packages(),
     classifiers=[
+        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
