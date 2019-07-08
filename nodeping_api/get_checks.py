@@ -76,6 +76,8 @@ class GetChecks:
 
         Makes a request to NodePing with the supplied API key.
         Queries NodePing for current failing checks.
+
+        *NOTE* this will also include disabled checks
         """
 
         failing_checks = {}
