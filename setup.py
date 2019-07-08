@@ -9,7 +9,7 @@ URL = 'https://github.com/NodePing/python3-nodeping-api'
 EMAIL = 'support@nodeping.com'
 AUTHOR = 'NodePing'
 REQUIRES_PYTHON = '>=3.5.0'
-VERSION = '0.9.0'
+VERSION = '0.9.1'
 LICENSE = 'MIT'
 
 REQUIRED = [
