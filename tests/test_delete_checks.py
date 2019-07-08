@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import unittest
@@ -11,11 +11,7 @@ except ModuleNotFoundError:
 
 TOKEN = parameters.token
 CUSTOMERID = parameters.customerid
-
-###############################################################################
-#              SUPPLY THIS OR WILL LOOK FOR CHECK BY TESTING NAME             #
-###############################################################################
-CHECKID = None
+CHECKID = parameters.checkid
 
 
 class TestGet(unittest.TestCase):
@@ -44,7 +40,7 @@ class TestGet(unittest.TestCase):
                         False, "Error occured removing. Not real checkid")
                 else:
                     self.assertEqual
-            elif not CHECKID:
+            else:
                 self.assertFalse(False, "No checkid available for delete test")
 
             result = delete_checks.remove(TOKEN, CHECKID, customerid=CUSTOMERID)

@@ -1,9 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import json
-import urllib.error
-from urllib.request import Request, urlopen
+try:
+    from urllib.error import HTTPError as httperror
+    from urllib.request import Request, urlopen
+except ImportError:
+    from urllib2 import Request, urlopen
+    from urllib2 import HTTPError as httperror
 
 
 def post(url, data_dictionary):
@@ -29,7 +33,7 @@ def post(url, data_dictionary):
 
     try:
         data = urlopen(req, json_data)
-    except urllib.error.HTTPError:
+    except httperror:
         print("You have supplied an invalid API key")
         return
 
@@ -56,7 +60,8 @@ def put(url, data_dictionary=None):
     if data_dictionary:
         json_data = json.dumps(data_dictionary).encode('utf-8')
 
-    req = Request(url, method='PUT')
+    req = Request(url)
+    req.get_method = lambda: 'PUT'
 
     if data_dictionary:
         req.add_header('Content-Type', 'application/json; charset=utf-8')
@@ -67,7 +72,7 @@ def put(url, data_dictionary=None):
             data = urlopen(req, json_data)
         else:
             data = urlopen(req)
-    except urllib.error.HTTPError:
+    except httperror:
         print("You have supplied an invalid API key")
         return
 
@@ -93,7 +98,7 @@ def get(url):
 
     try:
         data = urlopen(req)
-    except urllib.error.HTTPError:
+    except httperror:
         print("You have supplied an invalid API key")
         return
 
@@ -115,14 +120,16 @@ def delete(url):
     :rtype: dict
     """
 
-    req = Request(url, method='DELETE')
+    req = Request(url)
+    req.get_method = lambda: 'DELETE'
 
     try:
         data = urlopen(req)
-    except urllib.error.HTTPError:
+    except httperror:
         print("You have an invalid API key")
         return
 
     json_bytes = data.read()
 
     return json.loads(json_bytes.decode('utf-8'))
+

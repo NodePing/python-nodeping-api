@@ -1,11 +1,11 @@
-# python3-nodeping-api
+# python-nodeping-api
 
-A Python3 library for managing checks, schedules, and contacts
+A Python2/3 library for managing checks, schedules, and contacts
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [python3-nodeping-api](#python3-nodeping-api)
+- [python-nodeping-api](#python-nodeping-api)
     - [General Usage](#general-usage)
     - [Check token](#check-token)
         - [Checking validity](#checking-validity)
@@ -42,7 +42,7 @@ A Python3 library for managing checks, schedules, and contacts
 
 ## General Usage
 
-To use the NodePing API with Python3, you are required to use your
+To use the NodePing API with Python2/3, you are required to use your
 provided API token. You can find your API key on your NodePing account
 under `Account Settings → API`.
 
