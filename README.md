@@ -7,6 +7,7 @@ A Python2/3 library for managing checks, schedules, and contacts
 
 - [python-nodeping-api](#python-nodeping-api)
     - [General Usage](#general-usage)
+    - [Installation](#installation)
     - [Check token](#check-token)
         - [Checking validity](#checking-validity)
             - [Sample Code](#sample-code)
@@ -55,6 +56,14 @@ You can set these variables, for example, like so:
 ``` python
 token = 'my-api-token'
 customerid = 'your-subaccount-id'
+```
+
+## Installation
+
+To install this package, run:
+
+```
+pip install nodeping-api
 ```
 
 ## Check token
