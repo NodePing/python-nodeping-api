@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+""" Module for creating NodePing checks
+"""
+
 from . import check_token, _query_nodeping_api, config
 
 API_URL = config.API_URL
 
-defaults = {
+DEFAULTS = {
     'interval': 15,
     'enabled': False,
     'public': False,
@@ -59,24 +62,26 @@ def _package_variables(variables, check_type):
     variables.update({'type': check_type})
     variables.pop('token')
     variables.pop('customerid')
+    variables.pop('kwargs')
 
     return variables
 
 
 def audio_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing AUDIO check
 
@@ -116,26 +121,26 @@ def audio_check(
     """
 
     check_variables = _package_variables(locals(), 'AUDIO')
-
     url = _create_url(token, customerid)
 
     return _query_nodeping_api.post(url, check_variables)
 
 
 def cluster_check(
-    token,
-    data,
-    customerid="",
-    label="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        data,
+        customerid="",
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing Cluster check. Allows you to have a
     check pass/fail based on the status of other checks. Data is
@@ -193,25 +198,26 @@ def cluster_check(
 
 
 def dns_check(
-    token,
-    target="",
-    customerid="",
-    port=53,
-    transport='udp',
-    dnstype='A',
-    dnsrd=1,
-    contentstring="",
-    dnstoresolve="",
-    label="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target="",
+        customerid="",
+        port=53,
+        transport='udp',
+        dnstype='A',
+        dnsrd=1,
+        contentstring="",
+        dnstoresolve="",
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing DNS check
 
@@ -266,24 +272,25 @@ def dns_check(
 
 
 def ftp_check(
-    token,
-    target,
-    customerid="",
-    label="",
-    port=21,
-    username="",
-    password="",
-    invert=False,
-    contentstring="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid="",
+        label="",
+        port=21,
+        username="",
+        password="",
+        invert=False,
+        contentstring="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing FTP check
 
@@ -336,21 +343,22 @@ def ftp_check(
 
 
 def http_check(
-    token,
-    target,
-    customerid="",
-    label="",
-    ipv6=False,
-    follow=False,
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid="",
+        label="",
+        ipv6=False,
+        follow=False,
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing HTTP check
 
@@ -397,29 +405,30 @@ def http_check(
 
 
 def httpadv_check(
-    token,
-    target,
-    customerid="",
-    label="",
-    invert=False,
-    contentstring="",
-    data="",
-    method="",
-    postdata="",
-    receiveheaders="",
-    sendheaders="",
-    statuscode=200,
-    ipv6=False,
-    follow=False,
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid="",
+        label="",
+        invert=False,
+        contentstring="",
+        data="",
+        method="",
+        postdata="",
+        receiveheaders="",
+        sendheaders="",
+        statuscode=200,
+        ipv6=False,
+        follow=False,
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing HTTPADV check
 
@@ -488,23 +497,24 @@ def httpadv_check(
 
 
 def httpcontent_check(
-    token,
-    target,
-    customerid="",
-    label="",
-    invert=False,
-    contentstring="",
-    ipv6=False,
-    follow=False,
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid="",
+        label="",
+        invert=False,
+        contentstring="",
+        ipv6=False,
+        follow=False,
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing HTTPCONTENT check
 
@@ -557,20 +567,21 @@ def httpcontent_check(
 
 
 def httpparse_check(
-    token,
-    target,
-    customerid="",
-    label="",
-    fields="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid="",
+        label="",
+        fields="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing HTTPPARSE check.
 
@@ -638,26 +649,27 @@ def httpparse_check(
 
 
 def imap4_check(
-    token,
-    target,
-    customerid="",
-    label="",
-    port=143,
-    verify=True,
-    email="",
-    username="",
-    password="",
-    secure=False,
-    warningdays="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid="",
+        label="",
+        port=143,
+        verify=True,
+        email="",
+        username="",
+        password="",
+        secure=False,
+        warningdays="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing IMAP4 check
 
@@ -714,19 +726,20 @@ def imap4_check(
 
 
 def mysql_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing MYSQL check.
 
@@ -769,21 +782,22 @@ def mysql_check(
 
 
 def ntp_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    invert=False,
-    port=123,
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        invert=False,
+        port=123,
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing NTP check.
 
@@ -834,20 +848,21 @@ def ntp_check(
 
 
 def ping_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    ipv6=defaults['ipv6'],
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        ipv6=DEFAULTS['ipv6'],
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing PING check
 
@@ -896,26 +911,27 @@ def ping_check(
 
 
 def pop3_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    port="",
-    verify=True,
-    email="",
-    username="",
-    password="",
-    secure=False,
-    warningdays="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        port="",
+        verify=True,
+        email="",
+        username="",
+        password="",
+        secure=False,
+        warningdays="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """
     POP monitoring is an important part of an overall email availability
@@ -976,21 +992,22 @@ def pop3_check(
 
 
 def port_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    invert=False,
-    port="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        invert=False,
+        port="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """
     :type token: string
@@ -1036,21 +1053,22 @@ def port_check(
 
 
 def push_check(
-    token,
-    checktoken="reset",
-    customerid=None,
-    label="",
-    fields="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    oldresultfail=False,
-    dep="",
-    notifications=""
+        token,
+        checktoken="reset",
+        customerid=None,
+        label="",
+        fields="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        oldresultfail=False,
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing PUSH check
 
@@ -1122,20 +1140,21 @@ def push_check(
 
 
 def rbl_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    ignore="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        ignore="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing RBL check
 
@@ -1185,19 +1204,20 @@ def rbl_check(
 
 
 def rdp_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing RDP check
 
@@ -1240,19 +1260,20 @@ def rdp_check(
 
 
 def sip_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing SIP check
 
@@ -1295,27 +1316,28 @@ def sip_check(
 
 
 def smtp_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    invert=False,
-    port=25,
-    verify=True,
-    email="",
-    username="",
-    password="",
-    secure=False,
-    warningdays="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        invert=False,
+        port=25,
+        verify=True,
+        email="",
+        username="",
+        password="",
+        secure=False,
+        warningdays="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing SMTP check
     :type token: string
@@ -1373,23 +1395,24 @@ def smtp_check(
 
 
 def snmp_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    port=161,
-    fields="",
-    snmpv=1,
-    snmpcom="public",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        port=161,
+        fields="",
+        snmpv=1,
+        snmpcom="public",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing SNMP check
 
@@ -1462,24 +1485,25 @@ def snmp_check(
 
 
 def ssh_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    invert=False,
-    contentstring="",
-    port=22,
-    username="",
-    password="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        invert=False,
+        contentstring="",
+        port=22,
+        username="",
+        password="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing SSH check
 
@@ -1530,20 +1554,21 @@ def ssh_check(
 
 
 def ssl_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    warningdays="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        warningdays="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing SSL check
 
@@ -1588,22 +1613,23 @@ def ssl_check(
 
 
 def websocket_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    invert=False,
-    contentstring="",
-    data="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        invert=False,
+        contentstring="",
+        data="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing WebSocket check
 
@@ -1652,24 +1678,25 @@ def websocket_check(
 
 
 def whois_check(
-    token,
-    target,
-    customerid=None,
-    label="",
-    whoisserver="",
-    ipv6=False,
-    invert=False,
-    contentstring="",
-    warningdays="",
-    interval=defaults['interval'],
-    enabled=defaults['enabled'],
-    public=defaults['public'],
-    runlocations=defaults['runlocations'],
-    homeloc=defaults['homeloc'],
-    threshold=defaults['threshold'],
-    sens=defaults['sens'],
-    dep="",
-    notifications=""
+        token,
+        target,
+        customerid=None,
+        label="",
+        whoisserver="",
+        ipv6=False,
+        invert=False,
+        contentstring="",
+        warningdays="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
 ):
     """ Creates a NodePing whois check
 
