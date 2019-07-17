@@ -88,8 +88,6 @@ class GetChecks:
         else:
             url = "{0}checks?token={1}".format(API_URL, self.token)
 
-        url = "{0}checks?token={1}".format(API_URL, self.token)
-
         all_checks_dictionary = _query_nodeping_api.get(url)
 
         for check_id, contents in all_checks_dictionary.items():
