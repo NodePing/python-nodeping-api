@@ -114,7 +114,7 @@ def create_contact(token,
         url = "{0}contacts?token={1}&customerid={2}".format(
             API_URL, token, customerid)
     else:
-        url = "{0}/contacts?token={1}".format(API_URL, token)
+        url = "{0}contacts?token={1}".format(API_URL, token)
 
     data = {'name': name,
             'newaddresses': newaddresses,
