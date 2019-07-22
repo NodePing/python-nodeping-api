@@ -159,10 +159,10 @@ def update_contact(token,
     """
 
     if customerid:
-        url = "{0}contacts{1}?token={2}&customerid={3}".format(
+        url = "{0}contacts/{1}?token={2}&customerid={3}".format(
             API_URL, contact_id, token, customerid)
     else:
-        url = "{0}contacts{1}?token={2}".format(API_URL, contact_id, token)
+        url = "{0}contacts/{1}?token={2}".format(API_URL, contact_id, token)
 
     if newaddresses:
         # Do with newaddresses
