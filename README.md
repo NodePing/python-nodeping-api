@@ -8,21 +8,22 @@ A Python2/3 library for managing checks, schedules, and contacts
 - [python-nodeping-api](#python-nodeping-api)
     - [General Usage](#general-usage)
     - [Installation](#installation)
-    - [Check token](#check-token)
+    - [Verify API token](#verify-api-token)
         - [Checking validity](#checking-validity)
             - [Sample Code](#sample-code)
         - [Retrieving Account Info](#retrieving-account-info)
-    - [Get Checks](#get-checks)
-    - [Create Checks](#create-checks)
-    - [Update Checks](#update-checks)
-        - [Updating one](#updating-one)
-        - [Updating many](#updating-many)
-    - [Disable Checks](#disable-checks)
-        - [Disable by Label](#disable-by-label)
-        - [Disable by Target](#disable-by-target)
-        - [Disable by Type](#disable-by-type)
-        - [Disable All](#disable-all)
-    - [Delete Checks](#delete-checks)
+    - [Checks](#checks)
+        - [Get Checks](#get-checks)
+        - [Create Checks](#create-checks)
+        - [Update Checks](#update-checks)
+            - [Updating one](#updating-one)
+            - [Updating many](#updating-many)
+        - [Disable Checks](#disable-checks)
+            - [Disable by Label](#disable-by-label)
+            - [Disable by Target](#disable-by-target)
+            - [Disable by Type](#disable-by-type)
+            - [Disable All](#disable-all)
+        - [Delete Checks](#delete-checks)
     - [Contacts](#contacts)
         - [Getting Contacts](#getting-contacts)
             - [Get All Contacts](#get-all-contacts)
@@ -137,7 +138,9 @@ from nodeping_api import check_token
 subacc_info = check_token.info(token, customerid=customerid)
 ```
 
-## Get Checks
+## Checks
+
+### Get Checks
 
 Get checks on your NodePing account via the `get_checks.py` module.
 
@@ -186,7 +189,7 @@ query_nodeping = get_checks.GetChecks(token, checkid=_id)
 check = query_nodeping.get_by_id()
 ```
 
-## Create Checks
+### Create Checks
 
 Create checks on your NodePing account via the `create_check.py` module.
 
@@ -247,7 +250,7 @@ def push(token, contacts, region):
     pprint(results)
 ```
 
-## Update Checks
+### Update Checks
 
 Update checks on your NodePing account via the `update_checks.py`
 module.
@@ -256,7 +259,7 @@ This module lets you update one or many checks at once. To upate one
 check, you will have to supply the Check ID and the fields you want to
 change. To update many, you will have to create a list of Dheck IDs.
 
-### Updating one
+#### Updating one
 
 ``` python
 from nodeping_api import update_checks
@@ -270,7 +273,7 @@ data = update_checks.update(token, checkid, fields)
 The returned data will be the information about the check (with updated
 values) in a dictionary format.
 
-### Updating many
+#### Updating many
 
 ``` python
 from nodeping_api import update_checks
@@ -284,7 +287,7 @@ data = update_checks.update_many(token, checkids, fields)
 The returned data will be the information about the checks (with updated
 values) in a dictionary format.
 
-## Disable Checks
+### Disable Checks
 
 Disable checks on your NodePing account via the `disable_check.py`
 module.
@@ -306,7 +309,7 @@ be enabled if they have been disabled via this method.
 
 <https://nodeping.com/docs-api-checks.html#disableall>
 
-### Disable by Label
+#### Disable by Label
 
 Specify the label of the check to be enabled/disabled
 
@@ -319,7 +322,7 @@ label = "I dont need this"
 disable_check.disable_by_label(token, label, disable=True)
 ```
 
-### Disable by Target
+#### Disable by Target
 
 Specify the Check ID of the check to be enabled/disabled
 
@@ -332,7 +335,7 @@ checkid = '201205050153W2Q4C-0J2HSIRF'
 disable_check.disable_by_target(token, checkid, disable=True)
 ```
 
-### Disable by Type
+#### Disable by Type
 
 Specify the TYPE of checks to be disabled (such as PING checks)
 
@@ -345,7 +348,7 @@ _type = 'PING'
 disable_check.disable_by_type(token, _type, disable=True)
 ```
 
-### Disable All
+#### Disable All
 
 This disables all checks on the account
 
@@ -359,7 +362,7 @@ disable_check.disable_all(token, disable=True)
 disable_check.disable_all(token, disable=True, customerid=subacc)
 ```
 
-## Delete Checks
+### Delete Checks
 
 Delete checks on your NodePing account via the `delete_check.py` module.
 
