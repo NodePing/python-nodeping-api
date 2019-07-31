@@ -84,7 +84,7 @@ To install this package, run:
 pip install nodeping-api
 ```
 
-## Check token
+## Verify API token
 
 This module lets you check if your token is valid and return info about
 your account.
