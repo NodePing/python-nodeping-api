@@ -23,9 +23,14 @@ A Python2/3 library for managing checks, schedules, and contacts
         - [Disable by Type](#disable-by-type)
         - [Disable All](#disable-all)
     - [Delete Checks](#delete-checks)
-    - [Get Contacts](#get-contacts)
-        - [Get All Contacts](#get-all-contacts)
-        - [Get Contacts by Type](#get-contacts-by-type)
+    - [Contacts](#contacts)
+        - [Getting Contacts](#getting-contacts)
+            - [Get All Contacts](#get-all-contacts)
+            - [Get Contacts by Type](#get-contacts-by-type)
+        - [Create a Contact](#create-a-contact)
+        - [Update a Contact](#update-a-contact)
+        - [Delete a Contact](#delete-a-contact)
+        - [Resetting a Password](#resetting-a-password)
     - [Contact Groups](#contact-groups)
         - [Get Groups](#get-groups)
         - [Create Groups](#create-groups)
@@ -36,6 +41,19 @@ A Python2/3 library for managing checks, schedules, and contacts
         - [Create Schedules](#create-schedules)
         - [Update Schedules](#update-schedules)
         - [Delete Schedules](#delete-schedules)
+    - [Notifications](#notifications)
+        - [Notification Examples](#notification-examples)
+    - [Results](#results)
+        - [Getting Check Results](#getting-check-results)
+        - [Get Uptime](#get-uptime)
+        - [Getting Monthly Uptime Since 2019-02](#getting-monthly-uptime-since-2019-02)
+        - [Getting Daily Uptime In Time Range](#getting-daily-uptime-in-time-range)
+        - [Current Events](#current-events)
+    - [Information](#information)
+        - [Get Probe Info](#get-probe-info)
+            - [Get NY Probe Info](#get-ny-probe-info)
+        - [Get Location Information](#get-location-information)
+            - [Get North America Info](#get-north-america-info)
 
 <!-- markdown-toc end -->
 
@@ -366,19 +384,22 @@ Or if the check does not exist:
 
 `{'error': 'Unable to find that check'}`
 
-## Get Contacts
+## Contacts
 
-Get contacts on your NodePing account via the `get_contacts.py` module.
+
+### Getting Contacts
+
+Get contacts on your NodePing account via the `contacts.py` module.
 
 This module allows you to get all contacts on your account or by type
 such as sms, email, webhook.
 
-### Get All Contacts
+#### Get All Contacts
 
 ``` python
-from nodeping_api import get_contacts
+from nodeping_api import contacts
 
-contacts = get_contacts.get_all(token)
+all_contacts = contacts.get_all(token)
 ```
 
 Sample data returned:
@@ -402,15 +423,129 @@ Sample data returned:
 When providing contacts for creating checks, the `K5SP9CQP` in this
 example is the contact id you will need.
 
-### Get Contacts by Type
+#### Get Contacts by Type
 
 ``` python
-from nodeping_api import get_contacts
+from nodeping_api import contacts
 
 contact_type = 'sms'
 
-contacts = get_contacts.get_by_type(token, contact_type)
+contacts_by_type = contacts.get_by_type(token, contact_type)
 ```
+
+### Create a Contact
+
+Create a new contact on your account. When creating an account, supply the name,
+custrole (such as if they have view permissions or owner), and the addresses that
+contact will use.
+
+``` python
+>>> from nodeping_api import contacts
+>>> from pprint import pprint
+
+>>> token = 'my-api-token'
+>>> newaddresses = ['me@example.com', 'me2@example.com', '1235558888']
+>>> name = "my new contact"
+
+>>> new_contact = contacts.create_contact(token, name=name, newaddresses=newaddresses)
+
+pprint(new_contact)
+{'_id': '2019052211307H0IX-KR9CO',
+ 'addresses': {'JMMARFHQ': {'accountsuppressall': False,
+                            'address': 'me2@example.com'},
+               'NMYW1XC1': {'accountsuppressall': False,
+                            'address': 'me@example.com'},
+               'P080YGYO': {'accountsuppressall': False,
+                            'address': '1235558888'}},
+ 'customer_id': '2019052211307H0IX',
+ 'custrole': 'view',
+ 'name': 'my new contact',
+ 'sdomain': 'nodeping.com',
+ 'type': 'contact'}
+```
+
+
+### Update a Contact
+
+You can also update existing created contacts based on their contact ID. You can
+change its name, role, add contact addresses, or modify existing ones. Note that
+when you are modifying existing contacts, you must supply the entire list of
+contacts for that user. Missing entries will be removed.
+
+In the example below, the updated contact is exactly the same as the contact
+in the create contact example, but with the addresses updated as well as some
+new addresses added.
+
+https://nodeping.com/docs-api-contacts.html
+
+``` python
+>>> from nodeping_api import contacts
+>>> from pprint import pprint
+
+>>> token = 'my-api-token'
+>>> contact_id = "2019052211307H0IX-KR9CO"
+>>> newaddresses = ['me@example.com', 'me2@example.com', '1235558888']
+>>> addresses = {'JMMARFHQ': {'address': 'newme@example.com', 'accountsupressall': False}, 'NMYW1XC1': {'address': 'newme2@example.com', 'accountsupressall': False}, 'P080YGYO': {'address': '321444777', 'accountsuppressall': False}}
+
+>>> pprint(contacts.update_contact(token, contact_id, addresses=addresses, newaddresses=newaddresses))
+
+{'_id': '2019052211307H0IX-KR9CO',
+ 'addresses': {'8XK9OGNW': {'accountsuppressall': False,
+                            'address': 'me2@example.com'},
+               'CUSR6CTF': {'accountsuppressall': False,
+                            'address': 'me@example.com'},
+               'JMMARFHQ': {'accountsuppressall': False,
+                            'address': 'newme@example.com'},
+               'NMYW1XC1': {'accountsuppressall': False,
+                            'address': 'newme2@example.com'},
+               'P080YGYO': {'accountsuppressall': False,
+                            'address': '321444777'},
+               'VZ5HY05B': {'accountsuppressall': False,
+                            'address': '1235558888'}},
+ 'customer_id': '2019052211307H0IX',
+ 'custrole': 'view',
+ 'name': 'my new contact',
+ 'sdomain': 'nodeping.com',
+ 'type': 'contact'}
+```
+
+
+### Delete a Contact
+
+If you no longer need a contact, you can simply delete it by specifying its ID
+
+``` python
+from nodeping_api import contacts
+from pprint import pprint
+
+token = 'my-api-token'
+contact_id = "2019052211307H0IX-KR9CO"
+
+deleted = contacts.delete_contact(token, contact_id)
+```
+
+With the resulting output:
+
+``` python
+{'id': '2019052211307H0IX-KR9CO', 'ok': True}
+```
+
+
+### Resetting a Password
+
+You can reset passwords for a contact by specifying their contact ID:
+
+``` python
+from nodeping_api import contacts
+
+token = 'my-api-token'
+contact_id = '2019052211307H0IX-KR9CO'
+
+reset = 'contacts.reset_password(token, contact_id)
+```
+
+This will send a new password to the email address associated with that contact.
+
 
 ## Contact Groups
 
@@ -601,3 +736,242 @@ schedule_name = 'myschedule'
 deleted = schedules.delete_schedule(token, schedule)
 ```
 
+## Notifications
+
+Get notifications for your NodePing account via the `notifications.py` module.
+
+When getting notifications, you can limit how many you get by the number of hours,
+number of notifications, if you want to collect from subaccounts or not, and by
+check ID
+
+### Notification Examples
+
+
+Getting the last 100
+``` python
+from nodeping_api import notifications
+
+token = 'my-api-token
+limit = 100
+
+last_notifications = notifications.get_notifications(token, limit=limit)
+```
+
+Getting results for a check ID for the last 2 hours
+``` python
+from nodeping_api import notifications
+
+token = 'my-api-token
+span = 2
+check_id = '201205050153W2Q4C-0J2HSIRF'
+
+last_notifications = notifications.get_notifications(token, check_id=check_id, span=span)
+```
+
+
+## Results
+
+This module lets you get results and uptime for different checks at optionally given
+time durations. To get an idea of what the output will look like from the API, you
+can visit the documentation that shows what outputs you will get:
+
+https://nodeping.com/docs-api-results.html
+
+
+### Getting Check Results
+
+Get the last 100 results for a check.
+
+``` python
+from nodeping_api import results
+
+token = 'my-api-token
+check_id = '201205050153W2Q4C-0J2HSIRF'
+limit = 100
+
+last_results = results.get_results(token, check_id, limit=limit)
+```
+
+Your output will consist of a list of dictionaries that will look like this:
+
+``` python
+[{
+  "_id":"201205050153W2Q4C-0J2HSIRF-1345313038648",
+  "ci":"201205050153W2Q4C",
+  "t":"DNS",
+  "tg":"8.8.8.8",
+  "th":"5",
+  "i":"5",
+  "ra":"1345313029252",
+  "q":"caRRa3op0v",
+  "s":1345313038648,
+  "sc":"Success",
+  "su":true,
+  "rt":77,
+  "e":1345313038725,
+  "l":{"1345313038648":"ca"}
+}]
+```
+
+### Get Uptime
+
+This lets you get the uptime percentages for the specified check. The output
+will be a dictionary of the last days/months and their uptime and downtime.
+
+### Getting Monthly Uptime Since 2019-02
+
+With the API, monthly is the default interval, so you do not need to
+specify "monthly" unless you want to.
+
+``` python
+from nodeping_api import results
+from pprint import pprint
+
+token = 'my-api-token
+check_id = '201205050153W2Q4C-0J2HSIRF'
+
+pprint(results.get_uptime(token, check_id, start="2019-02"))
+```
+
+With the output:
+
+``` python
+{'2019-02': {'down': 2808090, 'enabled': 2419200000, 'uptime': 99.884},
+ '2019-03': {'down': 41679682, 'enabled': 2678398201, 'uptime': 98.444},
+ '2019-04': {'down': 4511825, 'enabled': 2592000000, 'uptime': 99.826},
+ '2019-05': {'down': 764817, 'enabled': 2678359942, 'uptime': 99.971},
+ '2019-06': {'down': 5762929, 'enabled': 2592000000, 'uptime': 99.778},
+ '2019-07': {'down': 3585847, 'enabled': 2661778859, 'uptime': 99.865},
+ 'total': {'down': 59113190, 'enabled': 15621737002, 'uptime': 99.622}}
+```
+
+### Getting Daily Uptime In Time Range
+
+You can also get daily results on uptime. In addition to that, you can
+specify the start/end dates. In this case, we will start on
+2019-07-01 and collect to 2019-07-15
+
+``` python
+from nodeping_api import results
+from pprint import pprint
+
+token = 'my-api-token
+check_id = '201205050153W2Q4C-0J2HSIRF'
+
+start="2019-07-01"
+end="2019-07-25"
+
+pprint(results.get_uptime(token, check_id, interval="days", start=start, end=end))
+```
+
+With the output:
+
+``` python
+{'2019-07-01': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-02': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-03': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-04': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-05': {'down': 140740, 'enabled': 86400000, 'uptime': 99.837},
+ '2019-07-06': {'down': 417545, 'enabled': 86400000, 'uptime': 99.517},
+ '2019-07-07': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-08': {'down': 144979, 'enabled': 86400000, 'uptime': 99.832},
+ '2019-07-09': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-10': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-11': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-12': {'down': 699479, 'enabled': 86400000, 'uptime': 99.19},
+ '2019-07-13': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ '2019-07-14': {'down': 0, 'enabled': 86400000, 'uptime': 100},
+ 'total': {'down': 1402743, 'enabled': 1209600000, 'uptime': 99.884}}
+```
+
+Note that all the results you get will also have a total downtime
+for that give time range.
+
+
+### Current Events
+
+Retrieves information about current "events" for checks. Events include down events 
+and disabled checks. If you need a list of all checks with their passing/failing 
+state, please use the 'checks' list rather than this 'current' call.
+
+``` python
+from nodeping_api import results
+
+token = 'my-api-token
+
+current = results.get_current(token)
+```
+
+
+## Information
+
+Get probe and location information via the `information.py` module.
+
+### Get Probe Info
+
+You can get information about all probes or a specific probe.
+This information mirrors what is available on our FAQ:
+
+https://nodeping.com/faq.html#ip-addresses
+
+
+#### Get NY Probe Info
+
+``` python
+from nodeping_api import information
+from pprint import pprint
+
+token = 'my-api-token'
+probe = "ny"
+
+ny_probe = information.get_probe(token, probe=probe)
+```
+
+With the output:
+
+``` python
+{'country': 'US',
+ 'ipv4': '66.23.202.26',
+ 'ipv6': '2605:9f80:c000:127::2',
+ 'location': 'ny',
+ 'locationname': 'New York City, New York',
+ 'region': 'nam',
+ 'regionname': 'North America'}
+```
+
+### Get Location Information
+
+With this function, you can get all probe information oa
+information about probes in a region.
+
+#### Get North America Info
+
+``` python
+from nodeping_api import information
+from pprint import pprint
+
+token = 'my-api-token'
+location = 'nam'
+
+nam_location = information.get_location(token, location=location)
+
+```
+
+With the output:
+
+``` python
+{'locations': ['il',
+               'tx',
+               'nj',
+               'ga',
+               'ca',
+               'co',
+               'wa',
+               'ny',
+               'py',
+               'oh',
+               'ut',
+               'or',
+               'fl'],
+ 'regionname': 'North America'}
+```

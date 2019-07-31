@@ -73,7 +73,7 @@ def put(url, data_dictionary=None):
         else:
             data = urlopen(req)
     except httperror:
-        print("You have supplied an invalid API key")
+        print("An error occurred with the HTTP request")
         return
 
     json_bytes = data.read()
@@ -132,4 +132,3 @@ def delete(url):
     json_bytes = data.read()
 
     return json.loads(json_bytes.decode('utf-8'))
-

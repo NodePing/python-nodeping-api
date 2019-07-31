@@ -37,8 +37,8 @@ def get_by_type(token, contacttype, customerid=None):
     Returns all the data in a dictionary format from the originl
     JSON that is gathered from NodePing.
 
-    :type token: string
     :param token: NodePing API token
+    :type token: str
     :type contacttype: string
     :param contacttype: Type of contact to be retrieved
     :type customerid: string
@@ -46,6 +46,8 @@ def get_by_type(token, contacttype, customerid=None):
     :return: Contacts by their contact type
     :rtype: dict
     """
+
+    check_token.is_valid(token)
 
     contact_dict = {}
 
@@ -72,7 +74,7 @@ def get_by_type(token, contacttype, customerid=None):
 def create_contact(token,
                    customerid=None,
                    name=None,
-                   custrole=None,
+                   custrole="view",
                    newaddresses=None):
     """ Create a new contact on your NodePing account.
     Create a list of dictionaries for the newaddresses variable
@@ -110,14 +112,18 @@ def create_contact(token,
     :rtype: dict
     """
 
+    check_token.is_valid(token)
+
     if customerid:
         url = "{0}contacts?token={1}&customerid={2}".format(
             API_URL, token, customerid)
     else:
         url = "{0}contacts?token={1}".format(API_URL, token)
 
+    addresses = [{"address": address} for address in newaddresses]
+
     data = {'name': name,
-            'newaddresses': newaddresses,
+            'newaddresses': addresses,
             'custrole': custrole}
 
     created = _query_nodeping_api.post(url, data)
@@ -149,7 +155,7 @@ def update_contact(token,
     :param name: New name for the contact
     :type name: str
     :param newaddresses: Any new addresses to provide for the contact
-    :type newaddresses:list
+    :type newaddresses: list
     :param addresses: Used to update existing addresses for the account
     :type addresses: dict
     :param custrole: The permissions the contact has over checks
@@ -158,24 +164,28 @@ def update_contact(token,
     :rtype: dict
     """
 
+    check_token.is_valid(token)
+
     if customerid:
         url = "{0}contacts/{1}?token={2}&customerid={3}".format(
             API_URL, contact_id, token, customerid)
     else:
         url = "{0}contacts/{1}?token={2}".format(API_URL, contact_id, token)
 
+    data = {}
+
     if newaddresses:
         # Do with newaddresses
-        data = {'newaddresses': newaddresses}
-    elif addresses:
+        new_addresses = [{"address": address} for address in newaddresses]
+        data.update({'newaddresses': new_addresses})
+    if addresses:
         # Do with addresses
-        data = {'addresses': addresses}
-    else:
-        data = {}
+
+        data.update({'addresses': addresses})
 
     if name:
         data.update({'name': name})
-    elif custrole:
+    if custrole:
         data.update({'custrole': custrole})
 
     return _query_nodeping_api.put(url, data)
@@ -198,6 +208,8 @@ def delete_contact(token,
     :rtype: dict
     """
 
+    check_token.is_valid(token)
+
     if customerid:
         url = "{0}contacts/{1}?token={2}&customerid={3}".format(
             API_URL, contact_id, token, customerid)
@@ -205,3 +217,31 @@ def delete_contact(token,
         url = "{0}contacts/{1}?token={2}".format(API_URL, contact_id, token)
 
     return _query_nodeping_api.delete(url)
+
+
+def reset_password(token, contact_id, customerid=None):
+    """ Reset the password for the specified contact
+
+    You can get the contact_id by querying the API with the get_all
+    function. The ID would look something like this: "201205050153W2Q4C-OVDN7"
+
+    :param token: The NodePing token for the account
+    :type token: str
+    :param contact_id: The contact that will have its password reset
+    :type contact_id: str
+    :param customerid: (optional) ID for subaccount
+    :type customerid: str
+    :return: A dictionary with a key or 'error' or 'success'
+    :rtye: dict
+    """
+
+    check_token.is_valid(token)
+
+    if customerid:
+        url = "{0}contacts/{1}?token={2}&customerid={3}&action=RESETPASSWORD".format(
+            API_URL, contact_id, token, customerid)
+    else:
+        url = "{0}contacts/{1}?token={2}&action=RESETPASSWORD".format(
+            API_URL, contact_id, token)
+
+    return _query_nodeping_api.get(url)
