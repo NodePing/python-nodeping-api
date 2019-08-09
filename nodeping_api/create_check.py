@@ -72,6 +72,8 @@ def audio_check(
         target,
         customerid=None,
         label="",
+        verifyvolume=False,
+        volumemin=-45,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -97,6 +99,10 @@ def audio_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :param verifyvolume: enable/disable volume detection
+    :type verifyvolume: bool
+    :param volumemin: The acceptable range for volume detection
+    :type volumemin: int
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
