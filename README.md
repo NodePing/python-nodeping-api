@@ -279,7 +279,7 @@ values) in a dictionary format.
 ``` python
 from nodeping_api import update_checks
 
-checkids = {'201205050153W2Q4C-0J2HSIRF': 'PING, '201205050153W2Q4C-4RZT8MLN': 'HTTP'}
+checkids = {'201205050153W2Q4C-0J2HSIRF': 'PING', '201205050153W2Q4C-4RZT8MLN': 'HTTP'}
 fields = {"public": False, "interval": 15}
 
 data = update_checks.update_many(token, checkids, fields)
