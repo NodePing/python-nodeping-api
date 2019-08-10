@@ -256,8 +256,8 @@ Update checks on your NodePing account via the `update_checks.py`
 module.
 
 This module lets you update one or many checks at once. To upate one
-check, you will have to supply the Check ID and the fields you want to
-change. To update many, you will have to create a list of Dheck IDs.
+check, you will have to supply the Check ID, the type of check, and the fields you want to
+change. To update many, you will have to create a dict of Check IDs.
 
 #### Updating one
 
@@ -265,9 +265,10 @@ change. To update many, you will have to create a list of Dheck IDs.
 from nodeping_api import update_checks
 
 checkid = '201205050153W2Q4C-0J2HSIRF'
+checktype = 'PING'
 fields = {"public": False, "interval": 15}
 
-data = update_checks.update(token, checkid, fields)
+data = update_checks.update(token, checkid, checktype, fields)
 ```
 
 The returned data will be the information about the check (with updated
@@ -278,7 +279,7 @@ values) in a dictionary format.
 ``` python
 from nodeping_api import update_checks
 
-checkid = ['201205050153W2Q4C-0J2HSIRF', '201205050153W2Q4C-4RZT8MLN']
+checkids = {'201205050153W2Q4C-0J2HSIRF': 'PING, '201205050153W2Q4C-4RZT8MLN': 'HTTP'}
 fields = {"public": False, "interval": 15}
 
 data = update_checks.update_many(token, checkids, fields)
