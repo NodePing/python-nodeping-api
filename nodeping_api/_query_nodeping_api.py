@@ -33,9 +33,8 @@ def post(url, data_dictionary):
 
     try:
         data = urlopen(req, json_data)
-    except httperror:
-        print("You have supplied an invalid API key")
-        return
+    except httperror as err:
+        return err
 
     json_bytes = data.read()
 
@@ -72,9 +71,8 @@ def put(url, data_dictionary=None):
             data = urlopen(req, json_data)
         else:
             data = urlopen(req)
-    except httperror:
-        print("An error occurred with the HTTP request")
-        return
+    except httperror as err:
+        return err
 
     json_bytes = data.read()
 
@@ -98,9 +96,8 @@ def get(url):
 
     try:
         data = urlopen(req)
-    except httperror:
-        print("You have supplied an invalid API key")
-        return
+    except httperror as err:
+        return err
 
     json_bytes = data.read()
 
@@ -125,9 +122,8 @@ def delete(url):
 
     try:
         data = urlopen(req)
-    except httperror:
-        print("You have an invalid API key")
-        return
+    except httperror as err:
+        return err
 
     json_bytes = data.read()
 
