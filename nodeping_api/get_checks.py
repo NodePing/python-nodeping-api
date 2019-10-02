@@ -109,8 +109,9 @@ class GetChecks:
         specified ID. Returns the contents for that check
         """
 
-        url = "{0}checks/{1}?token={2}".format(API_URL,
-                                               self.checkid, self.token)
+        
+        url = "{0}checks/{1}?token={2}&customerid={3}".format(API_URL,
+                                               self.checkid, self.token, self.customerid)
 
         return _query_nodeping_api.get(url)
 
