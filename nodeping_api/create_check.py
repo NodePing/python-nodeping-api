@@ -223,6 +223,7 @@ def dns_check(
         sens=DEFAULTS['sens'],
         dep="",
         notifications="",
+        verify=False,
         **kwargs
 ):
     """ Creates a NodePing DNS check
@@ -266,6 +267,8 @@ def dns_check(
     :type notifications: list
     :param notifications: list of objects containing contact ID, delay, and
     scheduling for notifications
+    :type verify: bool
+    :param verify: If True will authenticate using DNSSEC
     :return: Response from NodePing
     :rtype: dict
     """
