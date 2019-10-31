@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+(Placeholder for unreleased content)
+
+## [0.9.9_3]
+
+### Changed
+- Added Spec10DNS create check functionality
+- Added Spec10RDDS create check functionality
+- Added a verify parameter to verify DNSSEC when creating a DNS check (default is False)
+
+### Fixed
+- Contacts were not being created properly outside of email and sms contact types.
+  - Refer to the README and contacts.create_contact docstring. Instead of a list of addresses, it is now a list of dictionaries with the address and type.
 
 ## [0.9.9] - 2019-08-10
 
