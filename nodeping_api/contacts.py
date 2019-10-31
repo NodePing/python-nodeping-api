@@ -88,7 +88,7 @@ def create_contact(token,
     [{'address': 'me@email.com'}, {'address': '5551238888'}]
 
     newaddresses webhook:
-    [{'action': 'POST',
+    [{'action': 'post',
       'address': 'https://webhook.example.com',
       'data': {'event': '{event}',
                'id': '{_id}',
@@ -120,7 +120,7 @@ def create_contact(token,
     else:
         url = "{0}contacts?token={1}".format(API_URL, token)
 
-    addresses = [{"address": address} for address in newaddresses]
+    addresses = newaddresses
 
     data = {'name': name,
             'newaddresses': addresses,

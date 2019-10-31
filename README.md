@@ -448,18 +448,18 @@ contact will use.
 >>> from pprint import pprint
 
 >>> token = 'my-api-token'
->>> newaddresses = ['me@example.com', 'me2@example.com', '1235558888']
+>>> newaddresses = [{'address': 'me@example.com', 'type': 'email'}, {'address': 'me2@example.com', 'type': 'pagerduty'}, {'address': '1235558888', 'type': 'sms'}]
 >>> name = "my new contact"
 
 >>> new_contact = contacts.create_contact(token, name=name, newaddresses=newaddresses)
 
 pprint(new_contact)
 {'_id': '2019052211307H0IX-KR9CO',
- 'addresses': {'JMMARFHQ': {'accountsuppressall': False,
+ 'addresses': {'JMMARFHQ': {'accountsuppressall': false, 'type': 'email',
                             'address': 'me2@example.com'},
-               'NMYW1XC1': {'accountsuppressall': False,
+               'NMYW1XC1': {'accountsuppressall': false, 'type': 'pagerduty',
                             'address': 'me@example.com'},
-               'P080YGYO': {'accountsuppressall': False,
+               'P080YGYO': {'accountsuppressall': false, type': 'sms',
                             'address': '1235558888'}},
  'customer_id': '2019052211307H0IX',
  'custrole': 'view',
