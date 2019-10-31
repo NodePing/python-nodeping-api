@@ -223,6 +223,7 @@ def dns_check(
         sens=DEFAULTS['sens'],
         dep="",
         notifications="",
+        verify=False,
         **kwargs
 ):
     """ Creates a NodePing DNS check
@@ -266,6 +267,8 @@ def dns_check(
     :type notifications: list
     :param notifications: list of objects containing contact ID, delay, and
     scheduling for notifications
+    :type verify: bool
+    :param verify: If True will authenticate using DNSSEC
     :return: Response from NodePing
     :rtype: dict
     """
@@ -1259,6 +1262,148 @@ def rdp_check(
     """
 
     check_variables = _package_variables(locals(), 'RDP')
+
+    url = _create_url(token, customerid)
+
+    return _query_nodeping_api.post(url, check_variables)
+
+
+def spec10dns_check(
+        token,
+        data,
+        customerid="",
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
+):
+    """ Creates a NodePing SPEC10DNS check. Allows you to have a
+    check pass/fail based on the status of other DNS checks. Data is
+    expected to be a dictionary with a key "data" and values being
+    the ID of checks for the parent with values of 1 or 0 for pass
+    or fail.
+
+    Example dictionary:
+        checks = {
+        "data": {
+        "201205050153W2Q4C-0J2HSIRF": "1",
+        "201205050153W2Q4C-4RZT8MLN": "1",
+        "201205050153W2Q4C-IOPPFQOT": "1"
+        }
+        }
+
+    :type token: string
+    :param token: NodePing account API token
+    :type data: dict
+    :param data: Dict of child DNS checks
+    :type customerid: string
+    :param customerid: Optional NodePing subaccount ID
+    :type label: string
+    :param label: Name of check that will be created
+    :type interval: int
+    :param interval: Interval in minutes to monitor target
+    :type enabled: bool
+    :param enabled: If created check will be enabled or disabled
+    :type public: bool
+    :param public: If the results for the created check will be public or not
+    :type runlocations: str
+    :param runlocations: Which region to be originated from
+    :type homeloc: str
+    :param homeloc: Which probe in the region to originate the check from
+    :type threshold: int
+    :param threshold: Time in seconds for an acceptable response
+    :type sens: int
+    :param sens: Rechecks to help avoid unnecessary notifications
+    :type dep: string
+    :param dep: ID of the check used for the notification dependency
+    :type notifications: list
+    :param notifications: list of objects containing contact ID, delay, and
+    scheduling for notifications
+    :return: Response from NodePing
+    :rtype: dict
+    """
+
+    check_variables = _package_variables(locals(), 'SPEC10DNS')
+    data = check_variables['data']['data']
+    check_variables['data'] = data
+
+    url = _create_url(token, customerid)
+
+    return _query_nodeping_api.post(url, check_variables)
+
+
+def spec10rdds_check(
+        token,
+        data,
+        customerid="",
+        label="",
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
+):
+    """ Creates a NodePing SPEC10RDDS check. Allows you to have a
+    check pass/fail based on the status of other WHOIS checks. Data is
+    expected to be a dictionary with a key "data" and values being
+    the ID of checks for the parent with values of 1 or 0 for pass
+    or fail.
+
+    Example dictionary:
+        checks = {
+        "data": {
+        "201205050153W2Q4C-0J2HSIRF": "1",
+        "201205050153W2Q4C-4RZT8MLN": "1",
+        "201205050153W2Q4C-IOPPFQOT": "1"
+        }
+        }
+
+    :type token: string
+    :param token: NodePing account API token
+    :type data: dict
+    :param data: Dict of child WHOIS checks
+    :type customerid: string
+    :param customerid: Optional NodePing subaccount ID
+    :type label: string
+    :param label: Name of check that will be created
+    :type interval: int
+    :param interval: Interval in minutes to monitor target
+    :type enabled: bool
+    :param enabled: If created check will be enabled or disabled
+    :type public: bool
+    :param public: If the results for the created check will be public or not
+    :type runlocations: str
+    :param runlocations: Which region to be originated from
+    :type homeloc: str
+    :param homeloc: Which probe in the region to originate the check from
+    :type threshold: int
+    :param threshold: Time in seconds for an acceptable response
+    :type sens: int
+    :param sens: Rechecks to help avoid unnecessary notifications
+    :type dep: string
+    :param dep: ID of the check used for the notification dependency
+    :type notifications: list
+    :param notifications: list of objects containing contact ID, delay, and
+    scheduling for notifications
+    :return: Response from NodePing
+    :rtype: dict
+    """
+
+    check_variables = _package_variables(locals(), 'SPEC10RDDS')
+    data = check_variables['data']['data']
+    check_variables['data'] = data
 
     url = _create_url(token, customerid)
 
