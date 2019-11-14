@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
-## [0.9.9\_4]
+## [0.9.9\_4] - 2019-11-14
 
 ### Changed
 - Added a get\_one function for contacts
