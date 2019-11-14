@@ -31,6 +31,33 @@ def get_all(token, customerid=None):
     return _query_nodeping_api.get(url)
 
 
+def get_one(token, contact_id, customerid=None):
+    """ Gets the contact with the given contact ID
+
+    Returns the data for the contact in a dictionary format
+    from the original JSON that is gathered from NodePing
+
+    :type token: string
+    :param token: NodePing API token
+    :type contact_id: string
+    :param contact_id: contact ID
+    :type customerid: string
+    :param customerid: subaccount ID
+    :return: The contact's details
+    :rtype: dict
+    """
+
+    check_token.is_valid(token)
+
+    if customerid:
+        url = "{0}contacts?token={1}&id={2}&customerid={3}".format(
+               API_URL, token, contact_id, customerid)
+    else:
+        url = "{0}contacts?token={1}&id={2}".format(API_URL, token, contact_id)
+
+    return _query_nodeping_api.get(url)
+
+
 def get_by_type(token, contacttype, customerid=None):
     """ Get a contact based on its type, such as email, sms, webhook
 
@@ -176,8 +203,7 @@ def update_contact(token,
 
     if newaddresses:
         # Do with newaddresses
-        new_addresses = [{"address": address} for address in newaddresses]
-        data.update({'newaddresses': new_addresses})
+        data.update({'newaddresses': newaddresses})
     if addresses:
         # Do with addresses
 

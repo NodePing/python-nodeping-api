@@ -27,6 +27,7 @@ A Python2/3 library for managing checks, schedules, and contacts
     - [Contacts](#contacts)
         - [Getting Contacts](#getting-contacts)
             - [Get All Contacts](#get-all-contacts)
+            - [Get a Single Contact](#get-a-single-contact)
             - [Get Contacts by Type](#get-contacts-by-type)
         - [Create a Contact](#create-a-contact)
         - [Update a Contact](#update-a-contact)
@@ -395,8 +396,8 @@ Or if the check does not exist:
 
 Get contacts on your NodePing account via the `contacts.py` module.
 
-This module allows you to get all contacts on your account or by type
-such as sms, email, webhook.
+This module allows you to get all contacts on your account, get a single
+contact, or get by type such as sms, email, webhook.
 
 #### Get All Contacts
 
@@ -426,6 +427,32 @@ Sample data returned:
 
 When providing contacts for creating checks, the `K5SP9CQP` in this
 example is the contact id you will need.
+
+#### Get a Single Contact
+
+``` python
+from nodeping_api import contacts
+
+all_contacts = contacts.get_one(token, '201205050153W2Q4C-BKPGH')
+```
+
+Sample data returned:
+
+    {
+      "201205050153W2Q4C-BKPGH": {
+        "_id": "201205050153W2Q4C-BKPGH",
+        "type": "contact",
+        "customer_id": "201205050153W2Q4C",
+        "name": "Foo Bar",
+        "custrole": "owner",
+        "addresses": {
+          "K5SP9CQP": {
+            "address": "foo@example.com",
+            "status": "new"
+          }
+        }
+      }
+    }
 
 #### Get Contacts by Type
 
@@ -488,7 +515,7 @@ https://nodeping.com/docs-api-contacts.html
 
 >>> token = 'my-api-token'
 >>> contact_id = "2019052211307H0IX-KR9CO"
->>> newaddresses = ['me@example.com', 'me2@example.com', '1235558888']
+>>> newaddresses = [{'address': 'me@example.com'}, {'address': 'me2@example.com'}, {'address': '1235558888'}]
 >>> addresses = {'JMMARFHQ': {'address': 'newme@example.com', 'accountsupressall': False}, 'NMYW1XC1': {'address': 'newme2@example.com', 'accountsupressall': False}, 'P080YGYO': {'address': '321444777', 'accountsuppressall': False}}
 
 >>> pprint(contacts.update_contact(token, contact_id, addresses=addresses, newaddresses=newaddresses))
@@ -566,7 +593,7 @@ This module lets you manage contact groups in these ways:
   - Update contact groups
 
   - Delete contact groups
-  
+
 ### Get Groups
 
 ``` python
@@ -894,8 +921,8 @@ for that give time range.
 
 ### Current Events
 
-Retrieves information about current "events" for checks. Events include down events 
-and disabled checks. If you need a list of all checks with their passing/failing 
+Retrieves information about current "events" for checks. Events include down events
+and disabled checks. If you need a list of all checks with their passing/failing
 state, please use the 'checks' list rather than this 'current' call.
 
 ``` python
