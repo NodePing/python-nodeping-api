@@ -27,6 +27,7 @@ A Python2/3 library for managing checks, schedules, and contacts
     - [Contacts](#contacts)
         - [Getting Contacts](#getting-contacts)
             - [Get All Contacts](#get-all-contacts)
+            - [Get a Single Contact](#get-a-single-contact)
             - [Get Contacts by Type](#get-contacts-by-type)
         - [Create a Contact](#create-a-contact)
         - [Update a Contact](#update-a-contact)
