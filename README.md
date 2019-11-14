@@ -395,8 +395,8 @@ Or if the check does not exist:
 
 Get contacts on your NodePing account via the `contacts.py` module.
 
-This module allows you to get all contacts on your account or by type
-such as sms, email, webhook.
+This module allows you to get all contacts on your account, get a single
+contact, or get by type such as sms, email, webhook.
 
 #### Get All Contacts
 
@@ -426,6 +426,32 @@ Sample data returned:
 
 When providing contacts for creating checks, the `K5SP9CQP` in this
 example is the contact id you will need.
+
+#### Get a Single Contact
+
+``` python
+from nodeping_api import contacts
+
+all_contacts = contacts.get_one(token, '201205050153W2Q4C-BKPGH')
+```
+
+Sample data returned:
+
+    {
+      "201205050153W2Q4C-BKPGH": {
+        "_id": "201205050153W2Q4C-BKPGH",
+        "type": "contact",
+        "customer_id": "201205050153W2Q4C",
+        "name": "Foo Bar",
+        "custrole": "owner",
+        "addresses": {
+          "K5SP9CQP": {
+            "address": "foo@example.com",
+            "status": "new"
+          }
+        }
+      }
+    }
 
 #### Get Contacts by Type
 
