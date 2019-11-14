@@ -488,7 +488,7 @@ https://nodeping.com/docs-api-contacts.html
 
 >>> token = 'my-api-token'
 >>> contact_id = "2019052211307H0IX-KR9CO"
->>> newaddresses = ['me@example.com', 'me2@example.com', '1235558888']
+>>> newaddresses = [{'address': 'me@example.com'}, {'address': 'me2@example.com'}, {'address': '1235558888'}]
 >>> addresses = {'JMMARFHQ': {'address': 'newme@example.com', 'accountsupressall': False}, 'NMYW1XC1': {'address': 'newme2@example.com', 'accountsupressall': False}, 'P080YGYO': {'address': '321444777', 'accountsuppressall': False}}
 
 >>> pprint(contacts.update_contact(token, contact_id, addresses=addresses, newaddresses=newaddresses))
@@ -566,7 +566,7 @@ This module lets you manage contact groups in these ways:
   - Update contact groups
 
   - Delete contact groups
-  
+
 ### Get Groups
 
 ``` python
@@ -894,8 +894,8 @@ for that give time range.
 
 ### Current Events
 
-Retrieves information about current "events" for checks. Events include down events 
-and disabled checks. If you need a list of all checks with their passing/failing 
+Retrieves information about current "events" for checks. Events include down events
+and disabled checks. If you need a list of all checks with their passing/failing
 state, please use the 'checks' list rather than this 'current' call.
 
 ``` python

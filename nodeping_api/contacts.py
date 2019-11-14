@@ -176,8 +176,7 @@ def update_contact(token,
 
     if newaddresses:
         # Do with newaddresses
-        new_addresses = [{"address": address} for address in newaddresses]
-        data.update({'newaddresses': new_addresses})
+        data.update({'newaddresses': newaddresses})
     if addresses:
         # Do with addresses
 
