@@ -5,15 +5,20 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
-## [0.9.9\_4] - 2019-11-14
+## [1.0]
+
+### Added
+- New tests via pytest
+- Code reuse was simplified with a couple functions in a _utils.py file for simple URL creation as well as a function taht will escape strings that are used in URLs
 
 ### Changed
-- Added a get\_one function for contacts
+- Error outputs are different. Instead of ambiguous errors or 403 Forbidden results due to an invalid token or customerid, error responses given directly from the API will be provided in dictionary format.
 
 ### Fixed
-- Use a list of dictionaries for newaddresses in the update\_contacts function similar to what's done in create\_contact
+- group_contacts.py update_groups got a required vairable "name" for the name of the contact group that will be modified. Previously, group changes resulted in a new group being created instead of updated.
 
-## [0.9.9\_3]
+
+## [0.9.9_3]
 
 ### Changed
 - Added Spec10DNS create check functionality
@@ -22,18 +27,18 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Contacts were not being created properly outside of email and sms contact types.
-  - Refer to the README and contacts.create\_contact docstring. Instead of a list of addresses, it is now a list of dictionaries with the address and type.
+  - Refer to the README and contacts.create_contact docstring. Instead of a list of addresses, it is now a list of dictionaries with the address and type.
 
 ## [0.9.9] - 2019-08-10
 
 ### Changed
-- update\_checks.update
+- update_checks.update
   - **checktype** parameter now required. This is the TYPE for the check (PING, HTTP, DNS, etc.)
-- update\_checks.update\_many
+- update_checks.update_many
   - The `checkids` type was changed to a dictionary from a list to match the checktype with the check
   - When updating many checks, the dict would look like {checkid1: TYPE, checkid2: TYPE}
   
   
 ### Fixed
-- update\_checks.update properly updates all fields. The lack of checktype could cause some fields for a check to not update
-- update\_checks.update\_many properly updates all fields, for the same reason as above.
+- update_checks.update properly updates all fields. The lack of checktype could cause some fields for a check to not update
+- update_checks.update_many properly updates all fields, for the same reason as above.
