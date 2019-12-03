@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - New tests via pytest
-- Code reuse was simplified with a couple functions in a _utils.py file for simple URL creation as well as a function taht will escape strings that are used in URLs
+- Code reuse was simplified with a couple functions in a _utils.py file for simple URL creation as well as a function that will escape strings that are used in URLs
 
 ### Changed
 - Error outputs are different. Instead of ambiguous errors or 403 Forbidden results due to an invalid token or customerid, error responses given directly from the API will be provided in dictionary format.
