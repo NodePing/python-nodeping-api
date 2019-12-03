@@ -1,9 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from . import check_token, _query_nodeping_api, config
 
-API_URL = config.API_URL
+"""
+Get all contacts, by type or a single contact as well as
+creating, updating, and deleting contacts for a NodePing account
+or a subaccount.
+"""
+
+from . import _query_nodeping_api, _utils, config
+
+API_URL = "{0}contacts".format(config.API_URL)
 
 
 def get_all(token, customerid=None):
@@ -20,20 +27,13 @@ def get_all(token, customerid=None):
     :rtype: dict
     """
 
-    check_token.is_valid(token)
-
-    if customerid:
-        url = "{0}contacts?token={1}&customerid={2}".format(
-            API_URL, token, customerid)
-    else:
-        url = "{0}contacts?token={1}".format(API_URL, token)
+    url = _utils.create_url(token, API_URL, customerid)
 
     return _query_nodeping_api.get(url)
 
 
 def get_one(token, contact_id, customerid=None):
     """ Gets the contact with the given contact ID
-
     Returns the data for the contact in a dictionary format
     from the original JSON that is gathered from NodePing
 
@@ -47,13 +47,8 @@ def get_one(token, contact_id, customerid=None):
     :rtype: dict
     """
 
-    check_token.is_valid(token)
-
-    if customerid:
-        url = "{0}contacts?token={1}&id={2}&customerid={3}".format(
-               API_URL, token, contact_id, customerid)
-    else:
-        url = "{0}contacts?token={1}&id={2}".format(API_URL, token, contact_id)
+    url = "{0}?id={1}".format(API_URL, contact_id)
+    url = _utils.create_url(token, url, customerid)
 
     return _query_nodeping_api.get(url)
 
@@ -74,26 +69,19 @@ def get_by_type(token, contacttype, customerid=None):
     :rtype: dict
     """
 
-    check_token.is_valid(token)
-
     contact_dict = {}
 
-    if customerid:
-        url = "{0}contacts?token={1}&customerid={2}".format(
-            API_URL, token, customerid)
-    else:
-        url = "{0}contacts?token={1}".format(API_URL, token)
+    url = _utils.create_url(token, API_URL, customerid)
 
+    # Gets all contacts for account
     contacts = _query_nodeping_api.get(url)
 
+    # Sorts contacts by type to return
     for key, value in contacts.items():
         _id = value['addresses']
 
-        for _contact_id, details in _id.items():
-            _type = details['type']
-
-            if _type == contacttype:
-                contact_dict.update({key: value})
+        contact_dict.update({key: value for _contact_id, details in _id.items(
+        ) if details['type'] == contacttype})
 
     return contact_dict
 
@@ -139,13 +127,7 @@ def create_contact(token,
     :rtype: dict
     """
 
-    check_token.is_valid(token)
-
-    if customerid:
-        url = "{0}contacts?token={1}&customerid={2}".format(
-            API_URL, token, customerid)
-    else:
-        url = "{0}contacts?token={1}".format(API_URL, token)
+    url = _utils.create_url(token, API_URL, customerid)
 
     addresses = newaddresses
 
@@ -191,13 +173,8 @@ def update_contact(token,
     :rtype: dict
     """
 
-    check_token.is_valid(token)
-
-    if customerid:
-        url = "{0}contacts/{1}?token={2}&customerid={3}".format(
-            API_URL, contact_id, token, customerid)
-    else:
-        url = "{0}contacts/{1}?token={2}".format(API_URL, contact_id, token)
+    url = "{0}/{1}".format(API_URL, contact_id)
+    url = _utils.create_url(token, url, customerid)
 
     data = {}
 
@@ -206,7 +183,6 @@ def update_contact(token,
         data.update({'newaddresses': newaddresses})
     if addresses:
         # Do with addresses
-
         data.update({'addresses': addresses})
 
     if name:
@@ -234,13 +210,8 @@ def delete_contact(token,
     :rtype: dict
     """
 
-    check_token.is_valid(token)
-
-    if customerid:
-        url = "{0}contacts/{1}?token={2}&customerid={3}".format(
-            API_URL, contact_id, token, customerid)
-    else:
-        url = "{0}contacts/{1}?token={2}".format(API_URL, contact_id, token)
+    url = "{0}/{1}".format(API_URL, contact_id)
+    url = _utils.create_url(token, url, customerid)
 
     return _query_nodeping_api.delete(url)
 
@@ -261,13 +232,7 @@ def reset_password(token, contact_id, customerid=None):
     :rtye: dict
     """
 
-    check_token.is_valid(token)
-
-    if customerid:
-        url = "{0}contacts/{1}?token={2}&customerid={3}&action=RESETPASSWORD".format(
-            API_URL, contact_id, token, customerid)
-    else:
-        url = "{0}contacts/{1}?token={2}&action=RESETPASSWORD".format(
-            API_URL, contact_id, token)
+    url = "{0}/{1}?action=RESETPASSWORD".format(API_URL, contact_id)
+    url = _utils.create_url(token, url, customerid)
 
     return _query_nodeping_api.get(url)
