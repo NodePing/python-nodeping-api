@@ -43,6 +43,11 @@ A Python2/3 library for managing checks, schedules, and contacts
         - [Create Schedules](#create-schedules)
         - [Update Schedules](#update-schedules)
         - [Delete Schedules](#delete-schedules)
+    - [Maintenance](#maintenance)
+        - [Get Maintenance](#get-maintenance)
+        - [Create Maintenance](#create-maintenance)
+        - [Update Maintenance](#update-maintenance)
+        - [Delete Maintenance](#delete-maintenance)
     - [Notifications](#notifications)
         - [Notification Examples](#notification-examples)
     - [Results](#results)
@@ -767,6 +772,81 @@ schedule_name = 'myschedule'
 deleted = schedules.delete_schedule(token, schedule)
 ```
 
+## Maintenance
+
+Manage maintenances for your NodePing account via the `maintenance.py` module.
+
+Get, create, update, and delete maintenances as well as create ad-hoc
+maintenance schedules.
+
+### Get Maintenance
+
+You can get maintenances by id or all at once
+
+``` python
+from nodeping_api import maintenance
+
+token = "my-api-token"
+maintenanceid = "NZT101"
+
+# Get maintenance
+all_maintenance = maintenance.get_maintenance(token, maintenanceid=maintenanceid)
+
+# Get all maintenances
+one_maintenance = maintenance.get_maintenance(token)
+```
+
+### Create Maintenance
+
+Create scheduled maintenances or an ad-hoc maintenance
+
+``` python
+from nodeping_api import maintenance
+
+token = "my-api-token"
+cron = "1 12 * * *"
+duration = 30
+name = "my_maintenance"
+checklist = ["201911191441YC6SJ-4S9OJ78G","201911191441YC6SJ-XB5HUTG6"]
+
+# Create ad-hoc maintenance
+ad_hoc = maintenance.create_maintenance(token, duration, checklist, name=name, _id="ad-hoc") 
+
+# Create scheduled maintenance
+scheduled = maintenance.create_maintenance(token, duration, checklist,
+    name=name, enabled=True, cron=cron)
+```
+
+### Update Maintenance
+
+Update existing scheduled maintenances
+
+``` python
+from nodeping_api import maintenance
+
+token = "my-api-token"
+duration = "45"
+name = "new name for schedule"
+_id = "NZT101"
+checklist = ["201911191441YC6SJ-4S9OJ78G","201911191441YC6SJ-XB5HUTG6"]
+
+result = maintenance.update_maintenance(token, _id, duration, checklist, name=name)
+```
+
+### Delete Maintenance
+
+Delete an existing scheduled maintenance
+
+``` python
+from nodeping_api import maintenance
+
+token = "my-api-token"
+_id = "NZT101"
+
+deleted = maintenance.delete_maintenance(token, _id)
+```
+
+
 ## Notifications
 
 Get notifications for your NodePing account via the `notifications.py` module.
@@ -792,7 +872,7 @@ Getting results for a check ID for the last 2 hours
 ``` python
 from nodeping_api import notifications
 
-token = 'my-api-token
+token = "my-api-token"
 span = 2
 check_id = '201205050153W2Q4C-0J2HSIRF'
 
