@@ -73,9 +73,10 @@ def create_maintenance(
     Scheduled maintenance
     ---------------------
 
-    result = maintenance.create_maintenance(token, "scheduled", 20, [
+    result = maintenance.create_maintenance(token, 20, [
                                             "201911191441YC6SJ-4S9OJ78G"],
-                                            enabled=True, cron="1 12 * * *")
+                                            enabled=True, cron="1 12 * * *",
+                                            name="scheduled")
     """
 
     check_variables = locals()
