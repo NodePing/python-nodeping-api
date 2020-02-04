@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.1]
+
+### Added
+- Support for the new maintenance functionality <https://nodeping.com/docs-api-maintenance.html>
+
 ## [1.0]
 
 ### Added
