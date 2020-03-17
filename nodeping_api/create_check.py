@@ -42,6 +42,62 @@ def _package_variables(variables, check_type):
     return variables
 
 
+def agent_check(
+        token,
+        customerid=None,
+        label="",
+        interval=1,
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        oldresultfail=False,
+        **kwargs
+):
+    """ Creates a NodePing AGENT check
+
+    AGENT checks allow you to install a NodePing probe,
+    installed and maintained by you and available only to your account,
+    inside your private network that you can assign other NodePing checks
+    to run on. For example, installing an AGENT on your LAN will allow you
+    to create PING checks that can ensure internal devices are up and
+    running in the 192.168.x.x address space.
+
+    :type token: string
+    :param token: NodePing account API token
+    :type customerid: string
+    :param customerid: Optional NodePing subaccount ID
+    :type label: string
+    :param label: Name of the check that will be created
+    :type interval: int
+    :param interval: Interval in minutes to monitor target
+    :type enabled: bool
+    :param enabled: If created check will be enabled or disabled
+    :type public: bool
+    :param public: If the results for the created check will be public or not
+    :type threshold: int
+    :param threshold: Time in seconds for an acceptable response
+    :type sens: int
+    :param sens: Rechecks to help avoid unecessary notifications
+    :type dep: string
+    :param dep: ID of the check used for the notification dependency
+    :type notifications: list
+    :param notifications: list of objects containing contact ID, delay, and
+    scheduling for notifications
+    :type oldresultfail: bool
+    :param oldresultfail: Fail the check if results are too old
+    :return: Response from NodePing
+    :rtype: dict
+    """
+
+    check_variables = _package_variables(locals(), 'AGENT')
+    url = _utils.create_url(token, API_URL, customerid)
+
+    return _query_nodeping_api.post(url, check_variables)
+
+
 def audio_check(
         token,
         target,
