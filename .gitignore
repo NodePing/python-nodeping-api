@@ -1,7 +1,7 @@
 *.org
 __pycache__
 *~
-parameters.py
+tests/parameters.py
 *.pyc
 *.egg-info/
 *.egg
