@@ -19,6 +19,18 @@ EMAIL = "me@example.com"
 TARGET = "example.com"
 
 
+def test_create_agent_check():
+    """ Creates a basic agent check
+    """
+
+    label = "PYTEST_agent_check"
+
+    result = create_check.agent_check(
+        TOKEN, label=label, enabled=False, oldresultfail=True)
+
+    assert "_id" in result.keys and result['label'] == label
+
+
 def test_create_audio_check():
     """ Creates a basic audio check
     """
