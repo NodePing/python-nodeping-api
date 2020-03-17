@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.1.1]
+
+### Added
+- Support for creating AGENT checks <https://nodeping.com/agent_check.html>
+- Test added for creating an AGENT check
+
 ## [1.1]
 
 ### Added
