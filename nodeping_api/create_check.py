@@ -814,7 +814,7 @@ def mysql_check(
     :rtype: dict
     """
 
-    check_variables = _package_variables(locals(), 'IMAP4')
+    check_variables = _package_variables(locals(), 'MYSQL')
 
     url = _utils.create_url(token, API_URL, customerid)
 

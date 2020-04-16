@@ -8,7 +8,7 @@ DESCRIPTION = 'Python package for querying the NodePing API'
 URL = 'https://github.com/NodePing/python-nodeping-api'
 EMAIL = 'support@nodeping.com'
 AUTHOR = 'NodePing'
-VERSION = '1.1.1'
+VERSION = '1.1.1_1'
 LICENSE = 'MIT'
 
 setuptools.setup(
