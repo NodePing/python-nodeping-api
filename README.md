@@ -61,6 +61,9 @@ A Python2/3 library for managing checks, schedules, and contacts
             - [Get NY Probe Info](#get-ny-probe-info)
         - [Get Location Information](#get-location-information)
             - [Get North America Info](#get-north-america-info)
+    - [Diagnostics](#diagnostics)
+        - [Initiate an MTR](#initiate-an-mtr)
+        - [Do a DNS Lookup](#do-a-dns-lookup)
 
 <!-- markdown-toc end -->
 
