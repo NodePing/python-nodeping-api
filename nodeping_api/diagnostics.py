@@ -28,6 +28,8 @@ def get(
     :param dnstype: DNS record query type used with the dig tool
     :type count: int
     :param count: For ping and mtr. Number of pings to send. Max of 100
+    :return: Response from NodePing with diagnostics data
+    :rtype: dict
     """
 
     queries = locals()
