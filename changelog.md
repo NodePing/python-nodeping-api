@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.1.2]
+
+2020-05-06
+
+### Added
+- Support for getting diagnostics data <https://nodeping.com/docs-api-diagnostics.html>
+
 ## [1.1.1]
 
 ### Added
