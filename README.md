@@ -1086,3 +1086,44 @@ With the output:
                'fl'],
  'regionname': 'North America'}
 ```
+
+
+
+## Diagnostics
+
+Request diagnostic information from a probe or AGENT via the `diagnostics.py` module.
+
+Find more information on the diagnostics functionality [here](https://nodeping.com/docs-api-diagnostics.html)
+and more information about the diagnostics tool [here](https://nodeping.com/diagnostictools.html).
+
+### Initiate an MTR
+
+``` python
+from nodeping_api import diagnostics
+
+token = 'my-api-token'
+checkid = 'my-check-id'
+location = 'ny'
+tool = 'mtr'
+# If target not specified, the target will be taken from the check data
+target = 'example.com'
+count = 25
+
+result = diagnostics.get(token, checkid, location, tool, target=target, count=count)
+```
+
+This will run an MTR and return the output in a dictionary format.
+
+### Do a DNS Lookup
+
+``` python
+from nodeping_api import diagnostics
+token = 'my-api-token'
+checkid = 'my-check-id'
+location = 'ny'
+tool = 'dig'
+target = 'example.com'
+dnstype = 'AAAA'
+
+result = diagnostics.get(token, checkid, location, tool, target=target, dnstype=dnstype)
+```
