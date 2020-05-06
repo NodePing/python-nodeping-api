@@ -29,8 +29,7 @@ def create_url(token, url, customerid):
         token_str = "?token="
 
     if customerid:
-        url = "{0}{1}{2}&customerid={3}".format(
-            url, token_str, token, customerid)
+        url = "{0}{1}{2}&customerid={3}".format(url, token_str, token, customerid)
     else:
         url = "{0}{1}{2}".format(url, token_str, token)
 
@@ -42,3 +41,12 @@ def escape_url_string(string):
     """
 
     return quote(string)
+
+
+def generate_querystring(dictionary):
+    """ Generates a querystring from a dictionary
+    """
+
+    querystring = "".join({"&{0}={1}".format(k, v) for k, v in dictionary.items()})
+
+    return querystring.replace("&", "?", 1)
