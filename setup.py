@@ -3,13 +3,13 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-NAME = 'nodeping_api'
-DESCRIPTION = 'Python package for querying the NodePing API'
-URL = 'https://github.com/NodePing/python-nodeping-api'
-EMAIL = 'support@nodeping.com'
-AUTHOR = 'NodePing'
-VERSION = '1.1.2'
-LICENSE = 'MIT'
+NAME = "nodeping_api"
+DESCRIPTION = "Python package for querying the NodePing API"
+URL = "https://github.com/NodePing/python-nodeping-api"
+EMAIL = "support@nodeping.com"
+AUTHOR = "NodePing"
+VERSION = "1.1.3"
+LICENSE = "MIT"
 
 setuptools.setup(
     name=NAME,

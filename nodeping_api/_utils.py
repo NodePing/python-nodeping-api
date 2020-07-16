@@ -4,7 +4,10 @@
 """ Helper functions to reduce code reuse and misc other uses
 """
 
-from urllib.parse import quote
+try:
+    from urllib.parse import quote
+except ImportError:
+    from urllib import quote
 
 
 def create_url(token, url, customerid):

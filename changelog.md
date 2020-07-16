@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.1.3]
+
+2020-07-16
+
+### Fixed
+- Failed import fixed for Python 2.7
+
 ## [1.1.2]
 
 2020-05-06
