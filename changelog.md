@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.1.4]
+
+2020-08-25
+
+### Added
+- Added the `servername` variable to `create_check.ssl_check`
+
 ## [1.1.3]
 
 2020-07-16

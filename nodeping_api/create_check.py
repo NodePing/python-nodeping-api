@@ -1741,6 +1741,7 @@ def ssl_check(
         customerid=None,
         label="",
         warningdays="",
+        servername="",
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -1764,6 +1765,8 @@ def ssl_check(
     :param label: Name of the check that will be created
     :type warningdays: int
     :param warningdays: Number of days to warn about expiring SSL/TLS cert
+    :type servername: string
+    :param servername: specifies the FQDN sent to SNI services in the SSL check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
