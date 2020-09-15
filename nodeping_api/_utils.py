@@ -48,8 +48,12 @@ def escape_url_string(string):
 
 def generate_querystring(dictionary):
     """ Generates a querystring from a dictionary
+
+    Removes all `None` values
     """
 
-    querystring = "".join({"&{0}={1}".format(k, v) for k, v in dictionary.items()})
+    dict_no_none = {k: v for k, v in dictionary.items() if v}
+
+    querystring = "".join({"&{0}={1}".format(k, v) for k, v in dict_no_none.items()})
 
     return querystring.replace("&", "?", 1)

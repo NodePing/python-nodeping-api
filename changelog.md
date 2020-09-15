@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+# [1.2.0]
+
+2020-09-15
+
+### Fixed
+
+Fixed the `disabled_checks` function to check the `enable` field to see if the check is inactive or not.
+
+### Added
+
+- Added the uptime parameter to `get_checks`
+- Added a `get_many_checks` function to `get_checks` which can get a list of checks
+- Added an offset variable for `results.get_uptime`
+- Added a `get_event` function to `results.py` to retrieve events for checks
+
 ## [1.1.4]
 
 2020-08-25

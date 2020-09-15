@@ -74,6 +74,7 @@ def get_results(token,
 def get_uptime(token,
                check_id,
                customerid=None,
+               offset=None,
                interval="months",
                start=None,
                end="now"):
@@ -85,6 +86,8 @@ def get_uptime(token,
     :type check_id: str
     :param customerid: (Optional) subaccount ID
     :type customerid: str
+    :param offset: offset to have the system perform uptime calculations for a different time zone from UTC
+    :type offset: int
     :param interval: "days" or "months" for uptimes result for check
     :type interval: str
     :param start: optional start date for the range of days or months
@@ -103,6 +106,36 @@ def get_uptime(token,
             continue
         elif value:
             url = "{0}&{1}={2}".format(url, key, value)
+
+    return _query_nodeping_api.get(url)
+
+
+def get_event(token, check_id, customerid=None, start=None, end=None, limit=None):
+    """ Retrieves information about "events" for checks.
+
+    Events include down events and disabled checks.
+
+    :param token: NodePing API token
+    :type token: str
+    :param check_id: The ID of the check to get results for
+    :type check_id: str
+    :param customerid: (Optional) subaccount ID
+    :type customerid: str
+    :param start: Start date to retrieve events from a specific range of time.
+    :type start: str
+    :param end: End date to retrieve events from a specific range of time.
+    :type end: str
+    :param limit: limit for the number of records to retrieve
+    :type limit: int
+    """
+
+    parameters = locals()
+    parameters = {k: v for k, v in parameters.items() if v}
+
+    del(parameters["check_id"])
+
+    querystring = _utils.generate_querystring(parameters)
+    url = "{0}/events/{1}{2}".format(API_URL, check_id, querystring)
 
     return _query_nodeping_api.get(url)
 

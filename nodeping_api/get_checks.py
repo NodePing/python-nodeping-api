@@ -13,12 +13,12 @@ API_URL = "{0}checks".format(config.API_URL)
 
 
 class GetChecks:
-    def __init__(self, token, checkid=None, customerid=None):
+    def __init__(self, token, checkid=None, customerid=None, current=None, uptime=False):
         """
         :type token: string
         :param token: NodePing API token
-        :type checkid: string
-        :param checkid: ID for check to retrieve data for
+        :type checkid: string/list
+        :param checkid: ID or list of IDs for check to retrieve data for
         :type customerid: string
         :param customerid: subaccount ID
         """
@@ -26,6 +26,15 @@ class GetChecks:
         self.token = token
         self.checkid = checkid
         self.customerid = customerid
+        self.current = current
+        self.uptime = uptime
+        self.args = {
+            "token": token,
+            "id": checkid,
+            "customerid": customerid,
+            "current": current,
+            "uptime": uptime
+        }
 
     def all_checks(self):
         """ Gets all checks that exist for the account
@@ -38,6 +47,26 @@ class GetChecks:
         """
 
         url = _utils.create_url(self.token, API_URL, self.customerid)
+
+        if self.uptime:
+            return self._get_check_uptime(url)
+
+        return _query_nodeping_api.get(url)
+
+    def get_many_checks(self):
+        """ Get many checks for the account or subaccount
+
+        Provide a list of check IDs to be fetched.
+        """
+
+        if not isinstance(self.checkid, list):
+            return {"error": "A List must be provided"}
+
+        checks = ",".join(self.checkid)
+        args = self.args
+        args["id"] = checks
+
+        url = "{0}{1}".format(API_URL, _utils.generate_querystring(args))
 
         return _query_nodeping_api.get(url)
 
@@ -53,11 +82,14 @@ class GetChecks:
 
         url = _utils.create_url(self.token, API_URL, self.customerid)
 
+        if self.uptime:
+            url = "{0}&uptime=true".format(url)
+
         all_checks_dictionary = _query_nodeping_api.get(url)
 
         for check_id, contents in all_checks_dictionary.items():
             try:
-                state = contents['state']
+                state = contents["state"]
             except KeyError:
                 state = 0
 
@@ -79,11 +111,14 @@ class GetChecks:
 
         url = _utils.create_url(self.token, API_URL, self.customerid)
 
+        if self.uptime:
+            url = "{0}&uptime=true".format(url)
+
         all_checks_dictionary = _query_nodeping_api.get(url)
 
         for check_id, contents in all_checks_dictionary.items():
             try:
-                state = contents['state']
+                state = contents["state"]
             except KeyError:
                 state = 2
 
@@ -103,6 +138,9 @@ class GetChecks:
         url = "{0}/{1}".format(API_URL, self.checkid)
         url = _utils.create_url(self.token, url, self.customerid)
 
+        if self.uptime:
+            return self._get_check_uptime(url)
+
         return _query_nodeping_api.get(url)
 
     def disabled_checks(self):
@@ -112,20 +150,14 @@ class GetChecks:
         Queries NodePing for current events for the check.
         """
 
-        disabled_checks = {}
+        url = _utils.create_url(self.token, API_URL, self.customerid)
 
-        url = "{0}results/current".format(config.API_URL)
-        url = _utils.create_url(self.token, url, self.customerid)
+        if self.uptime:
+            url = "{0}&uptime=true".format(url)
 
         events_checks = _query_nodeping_api.get(url)
 
-        for check_id, contents in events_checks.items():
-            _type = contents['type']
-
-            if _type == 'disabled':
-                disabled_checks.update({check_id: contents})
-
-        return disabled_checks
+        return {k: v for k, v in events_checks.items() if v["enable"] == "inactive"}
 
     def last_result(self):
         """ Get the last result for the specified check
@@ -134,4 +166,16 @@ class GetChecks:
         url = "{0}/{1}?lastresult=true".format(API_URL, self.checkid)
         url = _utils.create_url(self.token, url, self.customerid)
 
+        if self.uptime:
+            return self._get_check_uptime(url)
+
         return _query_nodeping_api.get(url)
+
+    def _get_check_uptime(self, url):
+        """ Get check information along with its uptime
+
+        Expects a valid check ID and API token. Collects all
+        the info about the check and uptime for each day.
+        """
+
+        return _query_nodeping_api.get("%s&uptime=true" % url)
