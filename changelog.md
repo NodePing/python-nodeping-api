@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
-# [1.2.0]
+## [1.2.1]
+
+2021-02-01
+
+### Added
+
+DoH/DoT check type for `create_checks`
+
+## [1.2.0]
 
 2020-09-15
 
