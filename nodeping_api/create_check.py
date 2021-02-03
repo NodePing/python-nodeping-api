@@ -311,6 +311,92 @@ def dns_check(
     return _query_nodeping_api.post(url, check_variables)
 
 
+def doh_dot_check(
+        token,
+        target,
+        dnstoresolve,
+        label="",
+        customerid="",
+        dohdot="doh",
+        method="GET",
+        statuscode="200",
+        sendheaders={},
+        clientcert="",
+        verify=False,
+        dnstype="A",
+        contentstring="",
+        edns={},
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
+):
+    """ Creates a NodePing DNS check
+
+    :type token: str
+    :param token: NodePing account API token
+    :type target: str
+    :param target: URL of host to monitor
+    :type dnstoresolve: str
+    :param dnstoresolve: FQDN to query on target
+    :type label: str
+    :param label: name for the check
+    :type customerid: string
+    :param customerid: Optional NodePing subaccount ID
+    :type dohdot: str
+    :param dohdot: Select DoH or DoT
+    :type method: str
+    :param method: Select GET or POST
+    :type statuscode: str
+    :param statuscode: Expected Response HTTP status code (DoH only)
+    :type sendheaders: dict
+    :param sendheaders: Request Headers (DoH only)
+    :type clientcert: str
+    :param clientcert: string to specify the ID of a client cert/key to be used
+    :type verify: bool
+    :param verify: Whether or not to verify the SSL cert
+    :type dnstype: str
+    :param dnstype: Type of DNS record to query
+    :type contentstring: str
+    :param contentstring: What you expect the response to be when resolved
+    :type edns: dict
+    :param edns: optional object used to send EDNS(0) OPT pseuedo-records in a DNS query
+    :type interval: int
+    :param interval: Interval in minutes to monitor target
+    :type enabled: bool
+    :param enabled: If created check will be enabled or disabled
+    :type public: bool
+    :param public: If the results for the created check will be public or not
+    :type runlocations: str
+    :param runlocations: Which region to be originated from
+    :type homeloc: str
+    :param homeloc: Which probe in the region to originate the check from
+    :type threshold: int
+    :param threshold: Time in seconds for an acceptable response
+    :type sens: int
+    :param sens: Rechecks to help avoid unecessary notifications
+    :type dep: string
+    :param dep: ID of the check used for the notification dependency
+    :type notifications: list
+    :param notifications: list of objects containing contact ID, delay, and
+    scheduling for notifications
+    :return: Response from NodePing
+    :rtype: dict
+    """
+
+    check_variables = _package_variables(locals(), 'DOHDOT')
+
+    url = _utils.create_url(token, API_URL, customerid)
+
+    return _query_nodeping_api.post(url, check_variables)
+
+
 def ftp_check(
         token,
         target,
