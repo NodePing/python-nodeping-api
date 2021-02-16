@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.2.2]
+
+### Added
+
+Added the `ipv6` field to the DoH/DoT check
+
 ## [1.2.1]
 
 2021-02-01

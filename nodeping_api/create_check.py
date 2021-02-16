@@ -326,6 +326,7 @@ def doh_dot_check(
         dnstype="A",
         contentstring="",
         edns={},
+        ipv6=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
