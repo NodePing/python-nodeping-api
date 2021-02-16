@@ -368,6 +368,8 @@ def doh_dot_check(
     :param contentstring: What you expect the response to be when resolved
     :type edns: dict
     :param edns: optional object used to send EDNS(0) OPT pseuedo-records in a DNS query
+    :type ipv6: bool
+    :param ipv6: Whether to resolve IPv4 or IPv6
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
