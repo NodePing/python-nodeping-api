@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.2.3]
+
+### Added
+
+- Added the `sendheaders` field to the HTTP Parse check
+- Improved the `create_check.httpparse_check` docstring
+
+
 ## [1.2.2]
 
 ### Added

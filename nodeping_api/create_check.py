@@ -701,6 +701,7 @@ def httpparse_check(
         customerid="",
         label="",
         fields="",
+        sendheaders={},
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -719,20 +720,23 @@ def httpparse_check(
     Each object should have a name, min, and max
 
     Example dictionary:
-        fields = {
+    fields = {
         "fields": {
-        "processmem": {
-        "name": "processmem",
-        "min": 1000,
-        "max": 5000
-        },
-        "cpuload": {
-        "name": "cpuload",
-        "min": 1,
-        "max": 5
+            "processmem": {
+                "name": "processmem",
+                "min": 1000,
+                "max": 5000
+            },
+            "cpuload": {
+                "name": "cpuload",
+                "min": 1,
+                "max": 5
+            }
         }
-        }
-        }
+    }
+
+    Example sendheaders:
+    sendheaders = {"Content-Type": "application/json"}
 
     :type token: string
     :param token: NodePing account API token
@@ -745,6 +749,8 @@ def httpparse_check(
     :type fields: dict
     :param fields: Keyed list of fields, with an arbitrary string as the key.
     Should contain 3 elements: name, min, and max
+    :type sendheaders: dict
+    :param sendheaders: HTTP Headers to send in request
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
