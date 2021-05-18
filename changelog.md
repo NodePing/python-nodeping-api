@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 (Placeholder for unreleased content)
 
+## [1.2.4]
+
+### Added
+
+- Added the `dnssection` field to `create_check.dns_check`
+
 ## [1.2.3]
 
 ### Added
