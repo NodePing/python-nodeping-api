@@ -242,6 +242,7 @@ def dns_check(
         transport='udp',
         dnstype='A',
         dnsrd=1,
+        dnssection="answer",
         contentstring="",
         dnstoresolve="",
         label="",
