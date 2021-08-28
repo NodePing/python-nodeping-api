@@ -39,7 +39,8 @@ def create_subaccount(token,
                       email,
                       timezone,
                       location,
-                      emailme=False
+                      emailme=False,
+                      autodiagnotifications=False
                       ):
     """ Create a subaccount with your NodePing account.
 
@@ -79,7 +80,8 @@ def update_account(token,
                    timezone=None,
                    location=None,
                    emailme=False,
-                   status=None
+                   status=None,
+                   autodiagnotifications=False
                    ):
     """ Update information about the parent account or subaccounts
 

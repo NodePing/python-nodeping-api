@@ -46,6 +46,7 @@ def agent_check(
         token,
         customerid=None,
         label="",
+        autodiag=False,
         interval=1,
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -71,6 +72,8 @@ def agent_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -103,6 +106,7 @@ def audio_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         verifyvolume=False,
         volumemin=-45,
         interval=DEFAULTS['interval'],
@@ -130,6 +134,8 @@ def audio_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :param verifyvolume: enable/disable volume detection
     :type verifyvolume: bool
     :param volumemin: The acceptable range for volume detection
@@ -168,6 +174,7 @@ def cluster_check(
         data,
         customerid="",
         label="",
+        autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -202,6 +209,8 @@ def cluster_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -246,6 +255,7 @@ def dns_check(
         contentstring="",
         dnstoresolve="",
         label="",
+        autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -280,6 +290,8 @@ def dns_check(
     :param dnstoresolve: FQDN/IP you want to resolve
     :type label: string
     :param label: Name of check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -317,6 +329,7 @@ def doh_dot_check(
         target,
         dnstoresolve,
         label="",
+        autodiag=False,
         customerid="",
         dohdot="doh",
         method="GET",
@@ -349,6 +362,8 @@ def doh_dot_check(
     :param dnstoresolve: FQDN to query on target
     :type label: str
     :param label: name for the check
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type customerid: string
     :param customerid: Optional NodePing subaccount ID
     :type dohdot: str
@@ -406,6 +421,7 @@ def ftp_check(
         target,
         customerid="",
         label="",
+        autodiag=False,
         port=21,
         username="",
         password="",
@@ -432,6 +448,8 @@ def ftp_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type port: int
     :param port: Port to FTP server
     :type username: string
@@ -477,6 +495,7 @@ def http_check(
         target,
         customerid="",
         label="",
+        autodiag=False,
         ipv6=False,
         follow=False,
         interval=DEFAULTS['interval'],
@@ -500,6 +519,8 @@ def http_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type ipv6: bool
     :param ipv6: Whether to resolve IPv4 or IPv6
     :type follow: bool
@@ -539,6 +560,7 @@ def httpadv_check(
         target,
         customerid="",
         label="",
+        autodiag=False,
         invert=False,
         contentstring="",
         data="",
@@ -578,6 +600,8 @@ def httpadv_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type invert: bool
     :param invert: Used for "Does not contain" functionality
     :type data: dict
@@ -631,6 +655,7 @@ def httpcontent_check(
         target,
         customerid="",
         label="",
+        autodiag=False,
         invert=False,
         contentstring="",
         ipv6=False,
@@ -658,6 +683,8 @@ def httpcontent_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type invert: bool
     :param invert: Used for "Does not contain" functionality
     :type contentstring: string
@@ -701,6 +728,7 @@ def httpparse_check(
         target,
         customerid="",
         label="",
+        autodiag=False,
         fields="",
         sendheaders={},
         interval=DEFAULTS['interval'],
@@ -747,6 +775,8 @@ def httpparse_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type fields: dict
     :param fields: Keyed list of fields, with an arbitrary string as the key.
     Should contain 3 elements: name, min, and max
@@ -789,6 +819,7 @@ def imap4_check(
         target,
         customerid="",
         label="",
+        autodiag=False,
         port=143,
         verify=True,
         email="",
@@ -817,6 +848,8 @@ def imap4_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type port: int
     :param port: The port used to test IMAP4 communications
     :type verify: bool
@@ -866,6 +899,7 @@ def mysql_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -887,6 +921,8 @@ def mysql_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -922,6 +958,7 @@ def ntp_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         invert=False,
         port=123,
         interval=DEFAULTS['interval'],
@@ -949,6 +986,8 @@ def ntp_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type invert: bool
     :param invert: True means the check will pass if there is a response
     :type port: int
@@ -988,6 +1027,7 @@ def ping_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         ipv6=DEFAULTS['ipv6'],
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
@@ -1014,6 +1054,8 @@ def ping_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type ipv6: bool
     :param ipv6: If the ping should be icmpv6
     :type interval: int
@@ -1051,6 +1093,7 @@ def pop3_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         port="",
         verify=True,
         email="",
@@ -1083,6 +1126,8 @@ def pop3_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type port: int
     :param port: The port used to test POP communications
     :type verify: bool
@@ -1132,6 +1177,7 @@ def port_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         invert=False,
         port="",
         interval=DEFAULTS['interval'],
@@ -1154,6 +1200,8 @@ def port_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type invert: bool
     :param invert: False if you expect to not have connections to port accepted
     :type port: int
@@ -1193,6 +1241,7 @@ def push_check(
         checktoken="reset",
         customerid=None,
         label="",
+        autodiag=False,
         fields="",
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
@@ -1241,6 +1290,8 @@ def push_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type fields: dict
     :param fields: Contents of each metric collected with min/max values
     :type interval: int
@@ -1280,6 +1331,7 @@ def rbl_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         ignore="",
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
@@ -1307,6 +1359,8 @@ def rbl_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type ignore: list
     :param ignore: A list of DNSBL blacklists to ignore
     :type interval: int
@@ -1344,6 +1398,7 @@ def rdp_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -1365,6 +1420,8 @@ def rdp_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -1400,6 +1457,7 @@ def spec10dns_check(
         data,
         customerid="",
         label="",
+        autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -1434,6 +1492,8 @@ def spec10dns_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -1471,6 +1531,7 @@ def spec10rdds_check(
         data,
         customerid="",
         label="",
+        autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -1505,6 +1566,8 @@ def spec10rdds_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -1542,6 +1605,7 @@ def sip_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -1563,6 +1627,8 @@ def sip_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -1598,6 +1664,7 @@ def smtp_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         invert=False,
         port=25,
         verify=True,
@@ -1626,6 +1693,8 @@ def smtp_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type invert: bool
     :param invert: Check whether or not SMTP accepts mail from the address
     :type port: int
@@ -1677,6 +1746,7 @@ def snmp_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         port=161,
         fields="",
         snmpv=1,
@@ -1722,6 +1792,8 @@ def snmp_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type port: int
     :param port: Port for testing SNMP connectivity
     :type fields: dict
@@ -1767,6 +1839,7 @@ def ssh_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         invert=False,
         contentstring="",
         port=22,
@@ -1793,6 +1866,8 @@ def ssh_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type contentstring: string
     :param contentstring: string to look for in the response after login
     :type port: int
@@ -1836,6 +1911,7 @@ def ssl_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         warningdays="",
         servername="",
         interval=DEFAULTS['interval'],
@@ -1859,6 +1935,8 @@ def ssl_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type warningdays: int
     :param warningdays: Number of days to warn about expiring SSL/TLS cert
     :type servername: string
@@ -1898,6 +1976,7 @@ def websocket_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         invert=False,
         contentstring="",
         data="",
@@ -1922,6 +2001,8 @@ def websocket_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type invert: bool
     :param invert: If the response does/does not contain a string
     :type contentstring: string
@@ -1963,6 +2044,7 @@ def whois_check(
         target,
         customerid=None,
         label="",
+        autodiag=False,
         whoisserver="",
         ipv6=False,
         invert=False,
@@ -1989,6 +2071,8 @@ def whois_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
     :type whoisserver: string
     :param whoisserver: Server to query for whois entry
     :type ipv6: bool
