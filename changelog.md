@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.3.0]
+
+2021-10-09
+
+### Added
+
+- Mute notifications for a specific checkid via `update_checks.mute_check`
+- Mute a contact method via `contacts.mute_contact_method`
+- Mute a contact via `contacts.mute_contact`
+
 ## [1.2.5]
 
 ### Added

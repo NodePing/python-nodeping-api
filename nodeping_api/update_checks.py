@@ -39,6 +39,24 @@ def update(token, checkid, checktype, fields, customerid=None):
     return _query_nodeping_api.put(url, fields)
 
 
+def mute_check(token, checkid, checktype, duration, customerid=None):
+    """
+
+    """
+
+    if isinstance(duration, int):
+        submit_duration = _utils.create_timestamp(duration)
+    else:
+        submit_duration = duration
+
+    url = "{0}/{1}".format(API_URL, checkid)
+    url = _utils.create_url(token, url, customerid)
+
+    fields = {"mute": submit_duration, "type": checktype.upper()}
+
+    return _query_nodeping_api.put(url, fields)
+
+
 def update_many(token, checkids, fields, customerid=None):
     """ Updates a field(s) in multiple existing NodePing checks
 

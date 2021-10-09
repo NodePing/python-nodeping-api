@@ -193,6 +193,105 @@ def update_contact(token,
     return _query_nodeping_api.put(url, data)
 
 
+def mute_contact_method(token,
+                        contact_id,
+                        duration,
+                        customerid=None):
+
+    """ Mute a contact method for a specified duration in seconds.
+    Note that the contact has to be the ID in the "addresses" portion
+    of a contact
+
+    NOTE: This makes a GET request to the API before doing a PUT.
+
+    :param token: The NodePing token for the account
+    :type token: str
+    :param contact_id: The ID of the contact method that is being muted
+    :type contact_id: str
+    :param duration: How long to mute the contact method in seconds, or bool
+    :type duration: int/bool
+    :param customerid: (optional) ID for subaccount
+    :type customerid: str
+    """
+
+    acc_contacts = get_all(token, customerid)
+
+    if isinstance(duration, int):
+        submit_duration = _utils.create_timestamp(duration)
+    else:
+        submit_duration = duration
+
+    for k, v in acc_contacts.items():
+        for k2, v2 in v["addresses"].items():
+            if k2 == contact_id:
+                parent_contact_id = k
+                v2.update({"mute": submit_duration})
+
+                url = "{0}/{1}".format(API_URL, parent_contact_id)
+                url = _utils.create_url(token, url, customerid)
+
+                addresses = acc_contacts[parent_contact_id]["addresses"]
+                return _query_nodeping_api.put(url, {"addresses": addresses})
+
+    return {"error": "No contact method found"}
+
+
+def mute_contact(token,
+                 contact,
+                 duration,
+                 customerid=None):
+
+    """ Mute a contact for a specified duration in seconds.
+    Note that the contact has to be the ID (or _id) in the portion
+    of a contact
+
+    NOTE: This makes a GET request to the API before doing a PUT.
+
+    :param token: The NodePing token for the account
+    :type token: str
+    :param contact: The ID of the contact that is being muted
+    :type contact: str
+    :param duration: How long to mute the contact in seconds, or bool
+    :type duration: int/bool
+    :param customerid: (optional) ID for subaccount
+    :type customerid: str
+    """
+
+    acc_contacts = get_all(token, customerid)
+
+    if isinstance(duration, int):
+        submit_duration = _utils.create_timestamp(duration)
+    else:
+        submit_duration = duration
+
+    for k, v in acc_contacts.items():
+        if k == contact:
+            for k2, v2 in v["addresses"].items():
+                v2.update({"mute": submit_duration})
+
+            addresses = v["addresses"]
+
+            url = "{0}/{1}".format(API_URL, k)
+            url = _utils.create_url(token, url, customerid)
+
+            return _query_nodeping_api.put(url, {"addresses": addresses})
+
+    return {"error": "No contact found"}
+
+
+    # for k, v in contacts.items():
+    #     for k2, v2 in v["addresses"].items():
+    #         if k2 == contact_id:
+    #             parent_contact_id = k
+    #             v2.update({"mute": submit_duration})
+
+    #             url = "{0}/{1}".format(API_URL, parent_contact_id)
+    #             url = _utils.create_url(token, url, customerid)
+
+    #             addresses = contacts[parent_contact_id]["addresses"]
+    #             return _query_nodeping_api.put(url, {"addresses": addresses})
+
+
 def delete_contact(token,
                    contact_id,
                    customerid=None):

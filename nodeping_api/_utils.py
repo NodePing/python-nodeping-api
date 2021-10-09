@@ -4,6 +4,8 @@
 """ Helper functions to reduce code reuse and misc other uses
 """
 
+from time import time
+
 try:
     from urllib.parse import quote
 except ImportError:
@@ -57,3 +59,7 @@ def generate_querystring(dictionary):
     querystring = "".join({"&{0}={1}".format(k, v) for k, v in dict_no_none.items()})
 
     return querystring.replace("&", "?", 1)
+
+
+def create_timestamp(duration):
+    return int(time() * 1000) + (duration * 1000)
