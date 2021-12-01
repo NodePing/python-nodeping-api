@@ -1566,6 +1566,8 @@ def spec10rdds_check(
     :param customerid: Optional NodePing subaccount ID
     :type label: string
     :param label: Name of check that will be created
+    :type transport: bool/string
+    :param transport: whether the check should be both TCP/UDP (False), "udp", or "tcp"
     :type autodiag: bool
     :param autodiag: Enable/disable auto diagnostics for this check
     :type interval: int
@@ -1605,6 +1607,7 @@ def sip_check(
         target,
         customerid=None,
         label="",
+        transport=False,
         autodiag=False,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
