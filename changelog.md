@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.4.0]
+
+2021-12-01
+
+### Changed
+
+- `create_check.sip_check` has a `transport` option added. Set False to check both TCP/UDP, or set "tcp" for TCP or "udp" for UDP
+
 ## [1.3.0]
 
 2021-10-09
