@@ -146,7 +146,7 @@ def audio_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -217,7 +217,7 @@ def cluster_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -298,7 +298,7 @@ def dns_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -392,7 +392,7 @@ def doh_dot_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -466,7 +466,7 @@ def ftp_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -531,7 +531,7 @@ def http_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -626,7 +626,7 @@ def httpadv_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -699,7 +699,7 @@ def httpcontent_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -788,7 +788,7 @@ def httpparse_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -870,7 +870,7 @@ def imap4_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -929,7 +929,7 @@ def mysql_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -998,7 +998,7 @@ def ntp_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1064,7 +1064,7 @@ def ping_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1148,7 +1148,7 @@ def pop3_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1212,7 +1212,7 @@ def port_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1300,7 +1300,7 @@ def push_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1369,7 +1369,7 @@ def rbl_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1428,7 +1428,7 @@ def rdp_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1500,7 +1500,7 @@ def spec10dns_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1576,7 +1576,7 @@ def spec10rdds_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1638,7 +1638,7 @@ def sip_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1720,7 +1720,7 @@ def smtp_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1811,7 +1811,7 @@ def snmp_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1885,7 +1885,7 @@ def ssh_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -1950,7 +1950,7 @@ def ssl_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -2018,7 +2018,7 @@ def websocket_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from
@@ -2092,7 +2092,7 @@ def whois_check(
     :param enabled: If created check will be enabled or disabled
     :type public: bool
     :param public: If the results for the created check will be public or not
-    :type runlocations: str
+    :type runlocations: str or list
     :param runlocations: Which region to be originated from
     :type homeloc: str
     :param homeloc: Which probe in the region to originate the check from

@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.4.1]
+
+2022-01-13
+
+### Changed
+
+- No code has been changed, only docstring info in the different checktypes in `create_checks.py` noting that the runlocation can be a str or a list of two-character probe indicators (such as wa, tx, ny)
+
 ## [1.4.0]
 
 2021-12-01
