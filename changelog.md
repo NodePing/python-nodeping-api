@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.5.0]
+
+2022-03-23
+
+### Added
+
+- notification profile create/get/update/delete https://nodeping.com/docs-api-notificationprofiles.html
+
 ## [1.4.1]
 
 2022-01-13
