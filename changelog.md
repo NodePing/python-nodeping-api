@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.6.0]
+
+2022-10-06
+
+### Added
+
+* Add support for redis check https://nodeping.com/redis_check.html
+* Add support for mtr check https://nodeping.com/mtr_check.html
+
 ## [1.5.0]
 
 2022-03-23

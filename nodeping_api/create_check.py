@@ -894,6 +894,72 @@ def imap4_check(
     return _query_nodeping_api.post(url, check_variables)
 
 
+def mtr_check(
+        token,
+        target,
+        customerid=None,
+        label="",
+        autodiag=False,
+        ipv6=DEFAULTS['ipv6'],
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
+):
+    """ Creates a NodePing MTR check
+
+    Expects a token and target variable. The rest are optional
+    and are configured to match the NodePing defaults as described
+    in the documentation.
+
+    :type token: string
+    :param token: NodePing account API token
+    :type target: string
+    :param target: URL to target host
+    :type customerid: string
+    :param customerid: Optional NodePing subaccount ID
+    :type label: string
+    :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
+    :type ipv6: bool
+    :param ipv6: If the ping should be icmpv6
+    :type interval: int
+    :param interval: Interval in minutes to monitor target
+    :type enabled: bool
+    :param enabled: If created check will be enabled or disabled
+    :type public: bool
+    :param public: If the results for the created check will be public or not
+    :type runlocations: str or list
+    :param runlocations: Which region to be originated from
+    :type homeloc: str
+    :param homeloc: Which probe in the region to originate the check from
+    :type threshold: int
+    :param threshold: The max acceptable packet loss
+    :type sens: int
+    :param sens: Rechecks to help avoid unecessary notifications
+    :type dep: string
+    :param dep: ID of the check used for the notification dependency
+    :type notifications: list
+    :param notifications: list of objects containing contact ID, delay, and
+    scheduling for notifications
+    :return: Response from NodePing
+    :rtype: dict
+    """
+
+    check_variables = _package_variables(locals(), 'MTR')
+
+    url = _utils.create_url(token, API_URL, customerid)
+
+    return _query_nodeping_api.post(url, check_variables)
+
+
 def mysql_check(
         token,
         target,
@@ -1230,6 +1296,76 @@ def port_check(
     """
 
     check_variables = _package_variables(locals(), 'PORT')
+
+    url = _utils.create_url(token, API_URL, customerid)
+
+    return _query_nodeping_api.post(url, check_variables)
+
+
+def redis_check(
+        token,
+        target,
+        redistype,
+        hosts=[],
+        sentinelname=None,
+        customerid=None,
+        label="",
+        autodiag=False,
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        oldresultfail=False,
+        dep="",
+        notifications="",
+        **kwargs
+):
+    """ Creates a NodePing REDIS check
+
+    :type token: string
+    :param token: NodePing account API token
+    :type target: string
+    :param target: URL to target host
+    :type redistype: string
+    :param redistype: standalone, sentinel, cluster
+    :type hosts: list
+    :param hosts: For sentinel or cluster. The hostname, port, and password to connect
+    :sentinelname: The master/primary name for the sentinel to query
+    :type customerid: string
+    :param customerid: Optional NodePing subaccount ID
+    :type label: string
+    :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
+    :type fields: dict
+    :param fields: Contents of each metric collected with min/max values
+    :type interval: int
+    :param interval: Interval in minutes to monitor target
+    :type enabled: bool
+    :param enabled: If created check will be enabled or disabled
+    :type public: bool
+    :param public: If the results for the created check will be public or not
+    :type runlocations: str or list
+    :param runlocations: Which region to be originated from
+    :type homeloc: str
+    :param homeloc: Which probe in the region to originate the check from
+    :type threshold: int
+    :param threshold: Time in seconds for an acceptable response
+    :type sens: int
+    :param sens: Rechecks to help avoid unecessary notifications
+    :type dep: string
+    :param dep: ID of the check used for the notification dependency
+    :type notifications: list
+    :param notifications: list of objects containing contact ID, delay, and
+    scheduling for notifications
+    :return: Response from NodePing
+    :rtype: dict
+    """
+
+    check_variables = _package_variables(locals(), 'REDIS')
 
     url = _utils.create_url(token, API_URL, customerid)
 
