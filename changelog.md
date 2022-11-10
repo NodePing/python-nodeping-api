@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.7.0]
+
+2022-11-09
+
+### Added
+
+* Added support for PostgreSQl check https://nodeping.com/pgsql_check.html
+
+### Changed
+
+* Updated the MySQL check https://nodeping.com/mysql_check.html
+
 ## [1.6.0]
 
 2022-10-06

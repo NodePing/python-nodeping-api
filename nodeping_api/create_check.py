@@ -966,6 +966,14 @@ def mysql_check(
         customerid=None,
         label="",
         autodiag=False,
+        port=3306,
+        username=None,
+        password=None,
+        secure=False,
+        ipv6=False,
+        database=None,
+        query=None,
+        fields=None,
         interval=DEFAULTS['interval'],
         enabled=DEFAULTS['enabled'],
         public=DEFAULTS['public'],
@@ -989,6 +997,22 @@ def mysql_check(
     :param label: Name of the check that will be created
     :type autodiag: bool
     :param autodiag: Enable/disable auto diagnostics for this check
+    :type port: int
+    :param port: Port MySQL is listening on
+    :type username: str
+    :param username: Optional username to authenticate with
+    :type password: str
+    :param password: Optional password to authenticate with
+    :type secure: bool or string
+    :param bool: Use SSL/TLS. False or "ssl"
+    :type ipv6: bool
+    :param ipv6: If the ping should be icmpv6
+    :type database: str
+    :param database: Database name to query
+    :type query: str
+    :param query: Query to run on database
+    :type fields: dict
+    :param fields: Content in database to be matched
     :type interval: int
     :param interval: Interval in minutes to monitor target
     :type enabled: bool
@@ -1296,6 +1320,71 @@ def port_check(
     """
 
     check_variables = _package_variables(locals(), 'PORT')
+
+    url = _utils.create_url(token, API_URL, customerid)
+
+    return _query_nodeping_api.post(url, check_variables)
+
+
+def postgresql_check(
+        token,
+        target,
+        customerid=None,
+        label="",
+        autodiag=False,
+        query=None,
+        fields=None,
+        interval=DEFAULTS['interval'],
+        enabled=DEFAULTS['enabled'],
+        public=DEFAULTS['public'],
+        runlocations=DEFAULTS['runlocations'],
+        homeloc=DEFAULTS['homeloc'],
+        threshold=DEFAULTS['threshold'],
+        sens=DEFAULTS['sens'],
+        dep="",
+        notifications="",
+        **kwargs
+):
+    """ Creates a NodePing PGSQL check.
+
+    :type token: string
+    :param token: NodePing account API token
+    :type target: string
+    :param target: URL to target host
+    :type customerid: string
+    :param customerid: Optional NodePing subaccount ID
+    :type label: string
+    :param label: Name of the check that will be created
+    :type autodiag: bool
+    :param autodiag: Enable/disable auto diagnostics for this check
+    :type query: str
+    :param query: Query to run on database
+    :type fields: dict
+    :param fields: Content in database to be matched
+    :type interval: int
+    :param interval: Interval in minutes to monitor target
+    :type enabled: bool
+    :param enabled: If created check will be enabled or disabled
+    :type public: bool
+    :param public: If the results for the created check will be public or not
+    :type runlocations: str or list
+    :param runlocations: Which region to be originated from
+    :type homeloc: str
+    :param homeloc: Which probe in the region to originate the check from
+    :type threshold: int
+    :param threshold: Time in seconds for an acceptable response
+    :type sens: int
+    :param sens: Rechecks to help avoid unecessary notifications
+    :type dep: string
+    :param dep: ID of the check used for the notification dependency
+    :type notifications: list
+    :param notifications: list of objects containing contact ID, delay, and
+    scheduling for notifications
+    :return: Response from NodePing
+    :rtype: dict
+    """
+
+    check_variables = _package_variables(locals(), 'PGSQL')
 
     url = _utils.create_url(token, API_URL, customerid)
 
