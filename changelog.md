@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.7.1]
+
+2022-11-15
+
+* Allow creating checks that are muted
+
 ## [1.7.0]
 
 2022-11-09
