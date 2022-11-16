@@ -16,7 +16,8 @@ DEFAULTS = {
     'homeloc': False,
     'ipv6': False,
     'threshold': 5,
-    'sens': 2
+    'sens': 2,
+    'mute':False
 }
 
 
@@ -52,6 +53,7 @@ def agent_check(
         public=DEFAULTS['public'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         oldresultfail=False,
@@ -116,6 +118,7 @@ def audio_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -182,6 +185,7 @@ def cluster_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -263,6 +267,7 @@ def dns_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         verify=False,
@@ -348,6 +353,7 @@ def doh_dot_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -434,6 +440,7 @@ def ftp_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -505,6 +512,7 @@ def http_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -578,6 +586,7 @@ def httpadv_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -667,6 +676,7 @@ def httpcontent_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -738,6 +748,7 @@ def httpparse_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -834,6 +845,7 @@ def imap4_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -908,6 +920,7 @@ def mtr_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -981,6 +994,7 @@ def mysql_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1058,6 +1072,7 @@ def ntp_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1126,6 +1141,7 @@ def ping_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1198,6 +1214,7 @@ def pop3_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1277,6 +1294,7 @@ def port_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1341,6 +1359,7 @@ def postgresql_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1407,6 +1426,7 @@ def redis_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         oldresultfail=False,
         dep="",
         notifications="",
@@ -1475,6 +1495,7 @@ def push_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         oldresultfail=False,
         dep="",
         notifications="",
@@ -1565,6 +1586,7 @@ def rbl_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1631,6 +1653,7 @@ def rdp_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1690,6 +1713,7 @@ def spec10dns_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1764,6 +1788,7 @@ def spec10rdds_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1841,6 +1866,7 @@ def sip_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1908,6 +1934,7 @@ def smtp_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -1986,6 +2013,7 @@ def snmp_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -2080,6 +2108,7 @@ def ssh_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -2149,6 +2178,7 @@ def ssl_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -2215,6 +2245,7 @@ def websocket_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
@@ -2285,6 +2316,7 @@ def whois_check(
         homeloc=DEFAULTS['homeloc'],
         threshold=DEFAULTS['threshold'],
         sens=DEFAULTS['sens'],
+        mute=DEFAULTS['mute'],
         dep="",
         notifications="",
         **kwargs
