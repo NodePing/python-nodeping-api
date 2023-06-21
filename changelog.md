@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 (Placeholder for unreleased content)
 
+## [1.8.0]
+
+2023-06-21
+
+* Added MongoDB check support in create_checks
+* Added clientcert for `create_check.httpadv_check`
+
 ## [1.7.1]
 
 2022-11-15

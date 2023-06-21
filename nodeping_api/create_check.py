@@ -572,6 +572,7 @@ def httpadv_check(
         invert=False,
         contentstring="",
         data="",
+        clientcert="",
         method="",
         postdata="",
         receiveheaders="",
@@ -615,6 +616,8 @@ def httpadv_check(
     :param invert: Used for "Does not contain" functionality
     :type data: dict
     :param data: key/value pair for POST fields
+    :type clientcert: string
+    :param clientcert: Specify the ID of a client certificate/key to be used
     :type method: string
     :param method: HTTP method
     :type postdata: dict
